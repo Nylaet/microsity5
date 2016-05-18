@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>MicroSity</title>
+        <h:outputStylesheet library="css" name="layout1.css"/>
+    </h:head>
+    <h:body>
+        <ezcomp:header/>
+        <div id="left_content">
+            <div class="div middle">
+                <div>
+                    <h:graphicImage library="icons" name="personal_data.png" class="widget_icon" />
+                    <h:outputText value="Персональные данные" class="widget_text_header" />
+                </div>
+                <hr/>
+                <h:form>
+                    <h:panelGrid columns="2" cellspacing="5px">
+
+                        <h:outputText value="Эл. адрес: " styleClass="widget_text_main" />
+                        <h:inputText value="#{profileController.current.main_email}" required="true" requiredMessage="Поле не может быть пустым" styleClass="widget_text_main" />
+
+                        <h:outputText value="Пароль: " styleClass="widget_text_main"/>
+                        <h:inputText value="#{profileController.current.password}" styleClass="widget_text_main" />
+                        <h:outputText value="Дополнительные эл. адреса: " styleClass="widget_text_main" />
+                        <p:dataTable id="mails" var="email" value="#{profileController.current.emails}" emptyMessage="Записей не найдено" styleClass="widget_text_main">
+                            <p:column>
+                                <h:outputText value="#{email}"/>
+                            </p:column>
+                            <p:column style="width: 12px;">
+                                <p:commandLink actionListener="#{profileController.current.emails.remove(email)}" update="mails">
+                                    <h:graphicImage library="icons" name="decline.png" style="width: 10px;" />
+                                </p:commandLink>
+                            </p:column>
+                        </p:dataTable>
+                        <br/>
+                        <h:panelGrid columns="2">
+                            <h:inputText value="#{profileController.newEmail}" />
+                            <p:commandButton value="Добавить" actionListener="#{profileController.addEmail()}" update="mails" styleClass="widget_button_inside" />
+                        </h:panelGrid>
+                        <h:outputText value="Телефоны: " styleClass="widget_text_main" />
+                        <p:dataTable id="phones" var="phone" value="#{profileController.current.phones}" emptyMessage="Записей не найдено" styleClass="widget_text_main">
+                            <p:column>
+                                <h:outputText value="#{phone}"/>                                
+                            </p:column>
+                            <p:column style="width: 12px;">
+                                <p:commandLink actionListener="#{profileController.current.phones.remove(phone)}" update="phones">
+                                    <h:graphicImage library="icons" name="decline.png" style="width: 10px;" />
+                                </p:commandLink>
+                            </p:column>
+                        </p:dataTable>
+                        <br/>
+                        <h:panelGrid columns="2">
+                            <h:inputText value="#{profileController.newPhone}" />
+                            <p:commandButton value="Добавить" actionListener="#{profileController.addPhone()}" update="phones" styleClass="widget_button_inside" />
+                        </h:panelGrid>
+                        <br/>
+                        <h:panelGrid columns="2" style="text-align: right;width: 90%;">
+                            <p:commandLink action="#{profileController.editUser()}" update="@all" styleClass="widget_link">
+                                <h:graphicImage library="icons" name="apply.png" style="width: 12px;" />
+                                <h:outputText value="Сохранить" class="widget_text_main" style="color: #33cc00;" />
+                            </p:commandLink> 
+                            <p:commandLink update="@all" styleClass="widget_link">
+                                <h:graphicImage library="icons" name="decline.png" style="width: 12px;"/>
+                                <h:outputText value="Отменить" class="widget_text_main" style="color: #ea1820;" />
+                            </p:commandLink> 
+                        </h:panelGrid>
+                    </h:panelGrid>
+                </h:form>
+            </div>
+            <div class="div middle">
+                <div>
+                    <h:graphicImage library="icons" name="finance.png" class="widget_icon" />
+                    <h:outputText value="Финансовые данные" class="widget_text_header" />
+                </div>
+                <hr/> 
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Состояние счета: " styleClass="widget_text_main" />
+                        <h:outputText value="#{profileController.current.balance}" styleClass="widget_text_main" />
+                        <h:outputText value="Списание в месяц: " styleClass="widget_text_main" />
+                        <h:outputText value="0.0" styleClass="widget_text_main" />
+                        <h:outputText value="Пополнить счет: " styleClass="widget_text_main" />
+                        <h:panelGrid columns="2">
+                            <h:graphicImage library="icons" name="visa.png" styleClass="payment_icon" />
+                            <h:graphicImage library="icons" name="master.png" styleClass="payment_icon" />
+                            <h:graphicImage library="icons" name="paypal.png" styleClass="payment_icon" />
+                            <h:graphicImage library="icons" name="chek.png" styleClass="payment_icon" />
+                        </h:panelGrid>
+                    </h:panelGrid> 
+                </h:form>
+            </div>
+        </div>
+        <ezcomp:personal/>
+    </h:body>
+</html>
+

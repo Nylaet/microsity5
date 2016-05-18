@@ -1,0 +1,95 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package controllers.pagesControllers;
+
+import entitys.main.support.News;
+import facades.NewsFacade;
+import java.io.File;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+/**
+ *
+ * @author Panker
+ */
+@Named(value = "indexController")
+@SessionScoped
+public class IndexController implements Serializable {
+
+    private List<News> newses; 
+    private News addedNews;
+    @EJB
+    NewsFacade nf;
+    
+    public IndexController() {
+    }
+    
+    @PostConstruct
+    public void init(){
+        newses=nf.findAll();
+        if(newses.isEmpty()){
+            News emptyNews=new News();
+            emptyNews.setIconName("news-icon.png");
+            emptyNews.setTitle("Новостей нет :(");
+            emptyNews.setNewsText("К сожалению, новостей нет, но скоро появятся");
+            emptyNews.setMoreText("Здесь размещается более подробная информация о какой либо новости или описание продукта. Изменения вносит администратор");
+            newses.add(emptyNews);
+        }
+    }
+    
+    public List<String> getIconsList(){
+        List<String> iconsList=new ArrayList<>();
+        String relative="/resources/icons/";
+        ServletContext context=(ServletContext)FacesContext.getCurrentInstance().getExternalContext().getContext();
+        String absolute=context.getRealPath(relative);
+        
+        File file=new File(absolute);
+        File[] files=file.listFiles();
+        for (File file1 : files) {
+            iconsList.add(file1.getName());
+        }
+        return iconsList;
+    }
+
+    public void editNews(News edit){
+        nf.edit(edit);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Новость обновлена"));
+        FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("content");
+    }
+    
+    public void createNews(){
+        nf.create(addedNews);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Новость добавлена"));
+        FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("content");
+    }
+
+    public News getAddedNews() {
+        if(addedNews==null)addedNews=new News();
+        return addedNews;
+    }
+
+    public void setAddedNews(News addedNews) {
+        this.addedNews = addedNews;
+    }
+    
+    
+    public List<News> getNewses() {
+        return newses;
+    }
+
+    public void setNewses(List<News> newses) {
+        this.newses = newses;
+    }
+    
+    
+}

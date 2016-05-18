@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>MicroSity</title>
+        <h:outputStylesheet library="css" name="layout1.css"/>
+    </h:head>
+    <h:body>
+        <ezcomp:header/>
+        <div id="left_content">
+            <div id="messages">
+                <p:dataScroller var="mess" value="#{messagesController.messages}" >
+                    <div class="div middle">
+                        <div>
+                            <h:graphicImage library="icons" name="messages-widget.png" class="widget_icon" />
+                            <h:outputText value="#{mess.title}" class="widget_text_header" />
+                        </div>
+                        <hr/>
+                        <h:outputText value="#{mess.message}"/>
+                        <br/>
+                        <h:outputText value="#{messagesController.getDate(mess.date)}" style="font-size: 1ex;color: green;font-style: italic; " />
+                    </div>
+                </p:dataScroller>
+            </div>
+        </div>
+        <ezcomp:personal/>
+    </h:body>
+</html>
+

@@ -1,0 +1,342 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 29.01.2016, 11:46:20
+    Author     : Panker
+*/
+@import url(https://fonts.googleapis.com/css?family=Ubuntu&subset=latin,cyrillic);
+
+body{
+    background-color: lightgray ;
+    font-size: 1vw!important; 
+}
+
+#topbar{
+    width: 100%;
+    height: 80px;
+    background: rgb(240,249,255);
+    background: -moz-linear-gradient(-45deg, lightgoldenrodyellow 0%, rgba(0,53,128,1) 45%, rgba(0,53,128,1) 100%);
+    background: -webkit-linear-gradient(-45deg, lightgoldenrodyellow 0%,rgba(0,53,128,1) 45%,rgba(0,53,128,1) 100%);
+    background: linear-gradient(135deg, lightgoldenrodyellow 0%,rgba(0,53,128,1) 45%,rgba(0,53,128,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#003580',GradientType=1 );
+    box-sizing: border-box;
+    padding: 0px 3em;
+    position: fixed;
+    top: 0px;
+    left:0px;
+    z-index: 999;
+}
+
+#logo{
+    float: left;
+    width: 70px;
+    height: 70px;
+    padding-top: 10px;
+}
+.logo_image{
+    width: 12vw;
+    margin-top:5px;
+}
+
+#topbar_menu{
+    float: right;
+    height: 50px;
+    padding-top: 3px;
+}
+
+.topbar_menu_item_icon{
+    height: 30px;
+    padding: 8px;
+    margin-top: 15px;
+}
+
+.topbar_menu_item:hover{
+    background: #0083C9;
+}
+
+.topbar_menu_item div{
+    width: 80px;
+    height: 75px;
+}
+
+.topbar_menu_item div:hover{
+    background: #0083C9;
+
+}
+
+.topbar_menu_item_text{
+    color: #cccccc;
+
+}
+
+.topbar_menu_item{
+    text-decoration: none;
+        text-align: center;
+}
+
+#layout_menu_cover{
+    width: 100%;
+    height: 52px;
+    background-color: #0569c6;
+    box-sizing: border-box;
+    padding: 0px 11rem;
+    position: fixed;
+    top: 80px;;
+    left:0px;
+    z-index: 996;
+    display: table;
+}
+
+#layout_menu_ul{
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    display: table-row;
+}
+
+.layout_menu_cover_items{
+    box-sizing: border-box;
+    width: 130px;
+    padding: 0px;
+    margin: 0px;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    color: #cccccc;
+    padding-bottom: 4px;
+    
+}
+
+.topbar_menu_item_icon{
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: -6px;
+}
+
+.layout_menu_cover_link{
+    text-decoration: none;
+    color: #cccccc;
+
+}
+
+
+.layout_menu_cover_items:hover{
+    background-color: #0083C9;
+}
+
+.layout_menu_text{
+    color: #сссссс;
+    letter-spacing: 0;
+    line-height: 1.5em;
+    text-align: left;
+    text-decoration: none;
+    text-transform: capitalize;
+    word-spacing: 0;
+}
+
+.shaked{
+    animation-name: shake;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes shake {
+    10%,15%,20%,25%,30%{
+        transform: translate(-2px);
+    }
+    12%,17%,22%,27%,32%{
+        transform: translate(2px);
+    }
+    35%{
+        transform: translate(0px);
+    }
+}
+
+.div{
+    background-color: whitesmoke;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
+    padding: 10px 10px 15px 10px;
+    width: 100%;
+}
+
+.big{
+    max-width: 900px;
+    min-height: 20px;    
+}
+
+.middle{
+    max-width: 450px;
+}
+
+.small{
+    max-width: 256px;
+}
+
+.full{
+    width: 98%;
+    margin-right: 20px;
+}
+
+.tright{
+    text-align: right;
+}
+
+#emptybox{
+    margin-top: 180px;
+    min-width: 99%;
+    float: left;
+}
+#emptybox_admin{
+    margin-top: 280px;
+    min-width: 99%;
+    float: left;
+}
+
+#subscribles{
+    width: 70%;
+    height: 100px;
+    float: left;
+    position: fixed;
+    top: 168px;
+    left: 2%;
+}
+
+.personal{
+    position: fixed;
+    height: 100px;
+    float: left;
+}
+
+#left_content{
+    top: 170px;
+    min-width: 59%;
+    max-width: 60%;
+}
+#auth{
+    position: absolute;
+    width: 600px;
+    left: 50%;
+    top: 50%;
+    background-color: whitesmoke;
+    border: solid 1px black;
+    border-radius: 3px;
+    margin-left: -300px;
+    margin-top: -200px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    padding-top: 20px;
+}
+
+.loginGrid{
+    width: 90%;
+    margin: 5px 5px 5px 33px;
+}
+
+.login{
+    width: 98%;
+
+}
+
+.l_button{
+    background-color: #396bd4;
+    margin: 5px;
+    padding: 3px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.l_button:hover{
+    background-color: #bcccee;
+}
+
+.l_text{
+    color: #ea1820;
+    
+}
+
+#login_logo{
+    width: 150px;
+    margin-left: 3%;
+    margin-top: 3%;
+    
+}
+
+.widget_text_header{
+    margin-left: 13px;
+    margin-right: 7px;
+    margin-bottom: 1px;
+    color: rgb(0, 128, 138);
+}
+
+.widget_icon{
+    width: 25px;
+    margin-bottom: 1px;
+    margin-left: 7px;
+}
+
+.widget_text_main{
+    width: 98%;
+    text-align: center;
+}
+
+.widget_button_inside{
+    border: none;
+    width: 100%;
+    background-color:rgba(0, 128, 138, 0.5);
+    text-shadow: none!important;
+}
+
+.widget_button_inside:hover{
+   
+}
+
+.widget_link{
+    text-decoration: none!important;
+}
+
+.widget_link:hover{
+    text-shadow:2px 2px 2px , black;
+}
+
+.payment_icon{
+    width: 50px;
+}
+
+.right-static{
+    right: 5%;
+    min-width: 25%;
+    max-width: 25%;
+}
+
+
+#messages_dataScroller .ui-datascroller-content{
+    border: none!important;
+}
+
+.ui-widget-content{
+    border: none!important;
+    
+}
+
+.overlay{
+    max-width: 280px;
+}
+
+.imgSmall{
+    width: 28px;
+}
+
+.constructTable{
+    .tr{
+     border-bottom: 1px black solid;     
+    }
+}

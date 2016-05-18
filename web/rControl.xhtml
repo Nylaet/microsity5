@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>MicroSity</title>
+        <h:outputStylesheet library="css" name="layout1.css"/>
+        <script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript" />
+    </h:head>
+    <h:body>        
+        
+        <ezcomp:header/>
+        <div id="left_content">
+            <c:if test="#{!headerController.entered}">
+                <div class="div middle">
+                    <div class="imageNews" style="float: left;">
+                        <h:graphicImage library="images" name="content_picture/#{rControlController.content.advertImage}" style="max-width: 256px;" />
+                    </div>
+                    <h:outputText class="widget_text_header" value="#{rControlController.content.advertName}"/>
+                    <hr/>
+                    <h:outputText class="widget_text_main" value="#{rControlController.content.advMainText}"/>
+                    <p:panel toggleable="true" collapsed="true" header="Подробнее" style="float: left;">
+                        <h:outputText value="#{rControlController.content.advSubtitleText}" styleClass="moreText" />
+                    </p:panel>
+                </div>
+
+                <div class="div middle">
+                    <div >
+                        <h:graphicImage library="icons" name="rControl-widget.png" styleClass="widget_icon" />
+                        <h:outputText value="Демо контроллер №1" styleClass="widget_text_header" />
+                    </div>
+                    <hr/>
+                    <div style="min-height: 150px;min-width: 256px;max-width: 256px;">
+                        <h:form>
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Тип датчика" />
+                                <h:outputText value="ESPSwitcher" />
+                                
+                                <p:commandButton value="Включить" actionListener="#{rControlController.onSwitch()}" type="button" />
+                                <p:commandButton value="Выключить" actionListener="#{rControlController.offSwitch()}" type="button" />
+                            </h:panelGrid>
+
+                        </h:form>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="#{headerController.entered}">
+                <c:if test="#{headerController.admin}">
+                    <h:form>
+                        <div class="div middle">
+                            <h:outputText value="Конструктор описания услуги" class="widget_text_header" />
+                            <h:panelGrid columns="1" class="constructTable">
+                                <h:panelGrid columns="2">
+                                    <h:outputText value="Заголовок  описания" />
+                                    <h:inputText value="#{rControlController.content.advertName}" />
+
+                                    <h:graphicImage id="advImg" library="images" name="content_picture/#{rControlController.content.advertImage}" style="max-width: 126px;" />
+                                    <h:panelGrid columns="1">
+                                        <h:outputText  value="Выберите изображение" />
+                                        <p:fileUpload auto="true" label="Изображение" fileUploadListener="#{rControlController.content.setAdvertImage}" update="advImg"/>
+                                    </h:panelGrid>
+
+                                    <h:outputText value="Кратко опишите услугу"/>
+                                    <h:inputTextarea value="#{rControlController.content.advMainText}" />
+
+                                    <h:outputText value="Опишите услугу полностью, или дополнительные данные"/>
+                                    <h:inputTextarea value="#{rControlController.content.advSubtitleText}" />
+
+                                    <p:commandButton value="Обновить предпросмотр" update="@form" />
+                                    <p:commandButton value="Сохранить описание услуги" update="@all" actionListener="#{rControlController.saveContent()}" />
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </div>
+
+                        <div id="preview" class="div middle">
+                            <div class="imageNews" style="float: left;">
+                                <h:graphicImage library="images" name="content_picture/#{rControlController.content.advertImage}" style="max-width: 256px;" />
+                            </div>
+                            <h:outputText class="widget_text_header" value="#{rControlController.content.advertName}"/>
+                            <hr/>
+                            <h:outputText class="widget_text_main" value="#{rControlController.content.advMainText}"/>
+                            <p:panel toggleable="true" collapsed="true" header="Подробнее" style="float: left;">
+                                <h:outputText value="#{rControlController.content.advSubtitleText}" styleClass="moreText" />
+                            </p:panel>
+                        </div>
+                    </h:form>
+
+                </c:if>
+            </c:if>
+        </div>
+    </h:body>
+</html>
+

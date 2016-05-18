@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>MicroSity</title>
+        <h:outputStylesheet library="css" name="layout1.css"/>
+        <script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript" />
+    </h:head>
+    <h:body>
+        <ezcomp:header />
+        <c:if test="#{headerController.entered}">
+            <c:if test="#{headerController.admin}">
+                <div class="div middle">
+                    <h:form>
+                        <c:forEach var="client" items="#{clientsPageController.users}">
+                            <p:panel id="panel#{client.id}" toggleable="true" collapsed="true" styleClass="clientBasePanel" >
+                                <f:facet name="header">
+                                    <h:graphicImage library="icons" name="#{clientsPageController.getIcon(client)}" styleClass="imgSmall" />
+                                    <h:outputText value="#{client.main_email}" style="color: blue" />
+                                    <h:outputText value="#{client.lastSession}" style="font-style: italic" />
+                                </f:facet>
+                                <h:panelGrid columns="1">
+                                    <h:panelGrid columns="1">
+                                        <h:outputText value="Объектов: #{client.facilitys.size()}" />
+                                        <h:outputText value="Камер: #{clientsPageController.getCountCameras(client)}" />
+                                        <h:outputText value="Счетчиков: #{clientsPageController.getCountCounters(client)}" />
+                                        <h:outputText value="Датчиков: #{clientsPageController.getCountSensors(client)}" />
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2">
+                                        <h:inputText value="#{clientsPageController.newMessage}" />
+                                        <h:commandButton value="Отправить сообщение" actionListener="#{clientsPageController.sendMessage(client)}" />
+                                        <p:selectBooleanButton onLabel="Администратор" offLabel="Пользователь" value="#{client.isAdmin}" />
+                                        <br/>
+                                        <h:commandButton value="Отправить пароль" actionListener="#{loginPageController.sendPassword(client.main_email)}" />
+                                        <br/>
+                                        <p:commandButton value="Сохранить" actionListener="#{clientsPageController.updateUser(client)}" update="panel#{client.id}" />
+                                        <p:commandButton value="Отменить" update="panel#{client.id}" />
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                                <f:facet name="footer">
+                                    <h:outputText value="Баланс: #{client.balance} " />
+                                    <h:outputText value=" Дата списания: #{client.subscription.endSubscriptionToString}" />
+                                </f:facet>
+                            </p:panel>
+                            <hr/>
+                        </c:forEach>
+                    </h:form>
+                </div>
+            </c:if>
+        </c:if>
+    </h:body>
+</html>
+

@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <c:if test="#{headerController.entered}">
+            <c:if test="#{!headerController.admin}">
+                <div class="personal right-static" style="top:180px;">
+                    <div class="div">
+                        <div>
+                            <h:graphicImage library="icons" name="personal_data.png" class="widget_icon" />
+                            <h:outputText value="#{personalController.current.main_email}" class="widget_text_header" />
+                        </div>
+                        <hr/>
+                        <div>
+                            <h:outputText value="Последний визит: " styleClass="widget_text_main" />
+                            <h:outputText value="#{personalController.lastVisit}" styleClass="widget_text_main"  />
+                        </div>
+                        <div>
+                            <h:outputText value="Баланс: " styleClass="widget_text_main" />
+                            <h:outputText value="#{personalController.current.balance}" styleClass="widget_text_main" style="color:#{mainPage.getBalanceColor(userController.current)};" />
+                        </div>
+                        <div>
+                            <h:outputText value="Дата списания средств: " styleClass="widget_text_main" />
+                            <h:outputText value="#{personalController.endSubscription}" />
+                        </div>
+
+                    </div>                    
+                </div>
+                <div class="personal right-static" style="top: 295px;">
+                    <h:form>
+                        <div class="div">
+                            <div>
+                                <h:graphicImage library="icons" name="facility-icon.png" class="widget_icon" />
+                                <h:outputText value="Объекты" class="widget_text_header" />
+                            </div>
+                            <hr/>
+                            <div>
+                                <h:panelGrid columns="2">
+                                    <c:forEach var="facility" items="#{personalController.current.facilitys}">
+                                        <h:outputText value="#{facility.title}" />
+                                        <h:panelGrid columns="2">
+                                            <h:commandLink action="#{personalController.ViewFacility(facility.id)}" >
+                                                <h:outputText value="Перейти" />
+                                            </h:commandLink>
+                                            <h:commandLink actionListener="#{personalController.EditFacility(facility.id)}" >
+                                                <h:outputText value="Изменить" />
+                                            </h:commandLink>
+                                        </h:panelGrid>
+                                    </c:forEach>
+                                </h:panelGrid>
+                                <hr/>
+                                <p:commandButton value="Добавить объект" action="facilityWizard.xhtml?faces-redirect=true" styleClass="widget_button_inside" />
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </c:if>
+        </c:if>
+    </cc:implementation>
+</html>

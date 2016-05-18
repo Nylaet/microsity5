@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="profile.xhtml?faces-redirect=true" x="34" y="110" zoom="true"/>
+        <Node id="resources/ezcomp/header.xhtml" x="392" y="730" zoom="true"/>
+        <Node id="loginPage.xhtml" x="24" y="196" zoom="true"/>
+        <Node id="index.xhtml" x="53" y="11" zoom="true"/>
+        <Node id="registrationPage.xhtml?faces-redirect=true" x="547" y="208" zoom="true"/>
+        <Node id="resources/ezcomp/version.xhtml" x="620" y="352" zoom="true"/>
+        <Node id="index.xhtml?faces-redirect=true" x="37" y="250" zoom="true"/>
+        <Node id="resources/ezcomp/index.xhtml" x="12" y="345" zoom="true"/>
+        <Node id="resources/ezcomp/personal.xhtml" x="624" y="90" zoom="true"/>
+        <Node id="logRead.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="clients/xtml?faces-redirect=true" x="150" y="150" zoom="true"/>
+        <Node id="viewFacility.xhtml" x="71" y="479" zoom="true"/>
+        <Node id="cameras.xhtml?faces-redirect=true" x="1150" y="150" zoom="true"/>
+        <Node id="logRead.xhtml?faces-redirect=true" x="150" y="450" zoom="true"/>
+        <Node id="cameras.xhtml" x="361" y="91" zoom="true"/>
+        <Node id="loginPage.xhtml?faces-redirect=true" x="344" y="37" zoom="true"/>
+        <Node id="profile.xhtml" x="825" y="632" zoom="true"/>
+        <Node id="messages.xhtml" x="492" y="167" zoom="true"/>
+        <Node id="clients.xhtml" x="650" y="300" zoom="true"/>
+        <Node id="index.html" x="617" y="447" zoom="true"/>
+        <Node id="registrationPage.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="messages.xhtml?faces-redirect=true" x="332" y="257" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

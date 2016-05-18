@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>MicroSity</title>
+        <h:outputStylesheet library="css" name="layout1.css"/>
+        <script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript" />
+    </h:head>
+    <h:body>
+        <ezcomp:header />
+        <c:if test="#{headerController.entered}">
+            <c:if test="#{headerController.admin}">
+                <h:form>
+                    <div class="div middle">
+                        <div >
+                            <h:graphicImage library="icons" name="new-icon.png" styleClass="widget_icon" />
+                            <h:outputText value="База незарегистрированных устройств" styleClass="widget_text_header" />
+                        </div>
+                        <hr/>
+                        <div style="min-height: 150px;max-height: 256px;min-width: 256px;max-width: 256px;">
+                            <p:dataList var="esp" value="#{espViewController.unRegisteredESP}" >
+                                <h:outputText value="#{esp.sensorId}"/>
+                                <p:commandButton value="Добавить в базу" action="#{espViewController.addESP(esp)}" update="@all" />
+                            </p:dataList>
+                        </div>
+                    </div>
+                    <div class="div middle">
+                        <div >
+                            <h:graphicImage library="icons" name="new-icon.png" styleClass="widget_icon" />
+                            <h:outputText value="База зарегистрированных устройств" styleClass="widget_text_header" />
+                        </div>
+                        <hr/>
+                        <div style="min-height: 150px;max-height: 256px;min-width: 256px;max-width: 256px;">
+                            <p:dataList var="registered" value="#{espViewController.registeredESP}" >
+                                <h:outputText value="ID Базы : #{registered.microsityID} "/>
+                                <br/>
+                                <h:outputText value="ID устройства : #{registered.sensorID}" />
+                            </p:dataList>
+                        </div>
+                    </div>
+                </h:form>
+            </c:if>
+        </c:if>
+    </h:body>
+</html>
+

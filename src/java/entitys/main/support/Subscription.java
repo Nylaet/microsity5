@@ -1,0 +1,224 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package entitys.main.support;
+
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+
+/**
+ *
+ * @author Panker
+ */
+@Entity
+public class Subscription implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    //Старт подписки
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date startSubscription;
+    //Окончание подписки
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date endSubscription;
+    //Поддержка камер и стоимость
+    private boolean cameraSupport;
+    private double costCameraSupport;
+    //Поддержка счетчиков и стоимость
+    private boolean counterSupport;
+    private double costCouunterSupport;
+    //Поддержка датчиков и стоимость
+    private boolean sensorSupport;
+    private double costSensorSupport;
+    //Поддержка браслетов и стоимость
+    private boolean sateliteHSupport;
+    private double costSateleiteHSupport;
+    //Поддержка GPS и стоимость
+    private boolean sateliteMSupport;
+    private double costSateliteMSupport;
+    //Поддержка СМС, колличество в пакете и стоимость
+    private boolean smsSupport;
+    private int countSmsInPackage;
+    private double costSmsPackage;
+    //Новостная рассылка
+    private boolean newsSubscription;
+    
+    public String getEndSubscriptionToString(){
+        SimpleDateFormat df=new SimpleDateFormat("dd-MM-YYYY");
+        return df.format(endSubscription);
+    }
+    
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getStartSubscription() {
+        return startSubscription;
+    }
+
+    public void setStartSubscription(Date startSubscription) {
+        this.startSubscription = startSubscription;
+    }
+
+    public Date getEndSubscription() {
+        return endSubscription;
+    }
+
+    public void setEndSubscription(Date endSubscription) {
+        this.endSubscription = endSubscription;
+    }
+
+    public boolean isCameraSupport() {
+        return cameraSupport;
+    }
+
+    public void setCameraSupport(boolean cameraSupport) {
+        this.cameraSupport = cameraSupport;
+    }
+
+    public double getCostCameraSupport() {
+        return costCameraSupport;
+    }
+
+    public void setCostCameraSupport(double costCameraSupport) {
+        this.costCameraSupport = costCameraSupport;
+    }
+
+    public boolean isCounterSupport() {
+        return counterSupport;
+    }
+
+    public void setCounterSupport(boolean counterSupport) {
+        this.counterSupport = counterSupport;
+    }
+
+    public double getCostCouunterSupport() {
+        return costCouunterSupport;
+    }
+
+    public void setCostCouunterSupport(double costCouunterSupport) {
+        this.costCouunterSupport = costCouunterSupport;
+    }
+
+    public boolean isSensorSupport() {
+        return sensorSupport;
+    }
+
+    public void setSensorSupport(boolean sensorSupport) {
+        this.sensorSupport = sensorSupport;
+    }
+
+    public double getCostSensorSupport() {
+        return costSensorSupport;
+    }
+
+    public void setCostSensorSupport(double costSensorSupport) {
+        this.costSensorSupport = costSensorSupport;
+    }
+
+    public boolean isSateliteHSupport() {
+        return sateliteHSupport;
+    }
+
+    public void setSateliteHSupport(boolean sateliteHSupport) {
+        this.sateliteHSupport = sateliteHSupport;
+    }
+
+    public double getCostSateleiteHSupport() {
+        return costSateleiteHSupport;
+    }
+
+    public void setCostSateleiteHSupport(double costSateleiteHSupport) {
+        this.costSateleiteHSupport = costSateleiteHSupport;
+    }
+
+    public boolean isSateliteMSupport() {
+        return sateliteMSupport;
+    }
+
+    public void setSateliteMSupport(boolean sateliteMSupport) {
+        this.sateliteMSupport = sateliteMSupport;
+    }
+
+    public double getCostSateliteMSupport() {
+        return costSateliteMSupport;
+    }
+
+    public void setCostSateliteMSupport(double costSateliteMSupport) {
+        this.costSateliteMSupport = costSateliteMSupport;
+    }
+
+    public boolean isSmsSupport() {
+        return smsSupport;
+    }
+
+    public void setSmsSupport(boolean smsSupport) {
+        this.smsSupport = smsSupport;
+    }
+
+    public int getCountSmsInPackage() {
+        return countSmsInPackage;
+    }
+
+    public void setCountSmsInPackage(int countSmsInPackage) {
+        this.countSmsInPackage = countSmsInPackage;
+    }
+
+    public double getCostSmsPackage() {
+        return costSmsPackage;
+    }
+
+    public void setCostSmsPackage(double costSmsPackage) {
+        this.costSmsPackage = costSmsPackage;
+    }
+
+    public boolean isNewsSubscription() {
+        return newsSubscription;
+    }
+
+    public void setNewsSubscription(boolean newsSubscription) {
+        this.newsSubscription = newsSubscription;
+    }
+    
+    
+    
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Subscription)) {
+            return false;
+        }
+        Subscription other = (Subscription) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "entitys.support.Subscription[ id=" + id + " ]";
+    }
+    
+}

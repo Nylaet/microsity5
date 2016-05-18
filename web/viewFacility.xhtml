@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>MicroSity</title>
+        <h:outputStylesheet library="css" name="layout1.css"/>
+        <script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript" />
+    </h:head>
+    <h:body>        
+        
+        <ezcomp:header />
+            <div id="left_content">
+                <c:if test="#{headerController.entered}">
+                    <div id="fasility">
+                        <h:form>
+                            <div class="div middle">
+                                <div>
+                                    <h:graphicImage library="icons" name="facility-icon.png" class="widget_icon" />
+                                    <h:outputText value="#{facilityViewController.currentFacility.title}" class="widget_text_header" />
+                                </div>
+                                <hr/>
+                                <div>
+                                    <h:panelGrid columns="2">
+                                        <h:outputText value="Адрес объекта:" />
+                                        <h:outputText value="#{facilityViewController.address}"/>
+                                        <h:outputText value="Местоположение"/>
+
+                                        <p:gmap center="#{facilityViewController.GMapsAdress}"
+                                                zoom="15" type="hybrid" draggable="false" disableDefaultUI="true" 
+                                                disableDoubleClickZoom="true" navigationControl="false" 
+                                                mapTypeControl="false" style="width: 250px;height: 250px;"
+                                                model="#{facilityViewController.model}"/>
+
+                                        <c:if test="#{facilityViewController.currentFacility.cameras.size()>0}">
+                                            <h:outputText value="Подключено камер:" />
+                                            <h:outputText value="#{facilityController.currentFacility.cameras.size()}" />
+                                        </c:if>
+                                        <c:if test="#{facilityViewController.currentFacility.counters.size()>0}">
+                                            <h:outputText value="Счетчики:" />
+                                            <h:outputText value="" />
+                                            <c:forEach var="counter" items="#{facilityViewController.currentFacility.counters}">
+                                                <h:outputText value="#{counter.title}:"/>
+                                                <h:outputText value="#{counter.valueNow}" />
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="#{facilityViewController.currentFacility.sensors.size()>0}">
+                                            <h:outputText value="Датчики и контроллеры:" />
+                                            <h:outputText value="" />
+                                            <c:forEach var="sensor" items="#{facilityViewController.currentFacility.sensors}">
+                                                <h:outputText value="#{sensor.name}:"/>
+                                                <h:outputText value="#{sensor.value}" />
+                                            </c:forEach>
+                                        </c:if>
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </c:if>
+                <c:if test="#{!headerController.entered}">
+                    <div id="fasility">
+                        <h:form>
+                            <div class="div middle">
+                                <div>
+                                    <h:graphicImage library="icons" name="facility-icon.png" class="widget_icon" />
+                                    <h:outputText value="#{facilityViewController.demoFacility.title}" class="widget_text_header" />
+                                </div>
+                                <hr/>
+                                <div>
+                                    <h:panelGrid columns="2">
+                                        <h:outputText value="Адрес объекта:" />
+                                        <h:outputText value="#{facilityViewController.demoAddress}"/>
+                                        <h:outputText value="Местоположение"/>
+
+                                        <p:gmap center="#{facilityViewController.demoGMapsAdress}"
+                                                zoom="15" type="hybrid" draggable="false" disableDefaultUI="true" 
+                                                disableDoubleClickZoom="true" navigationControl="false" 
+                                                mapTypeControl="false" style="width: 250px;height: 250px;"
+                                                model="#{facilityViewController.demoModel}"/>
+
+                                        <c:if test="#{facilityViewController.demoFacility.cameras.size()>0}">
+                                            <h:outputText value="Подключено камер:" />
+                                            <h:outputText value="#{facilityController.demoFacility.cameras.size()}" />
+                                        </c:if>
+                                        <c:if test="#{facilityViewController.demoFacility.counters.size()>0}">
+                                            <h:outputText value="Счетчики:" />
+                                            <h:outputText value="" />
+                                            <c:forEach var="counter" items="#{facilityViewController.demoFacility.counters}">
+                                                <h:outputText value="#{counter.title}:"/>
+                                                <h:outputText value="#{counter.valueNow}" />
+                                            </c:forEach>
+                                        </c:if>
+                                        <c:if test="#{facilityViewController.demoFacility.sensors.size()>0}">
+                                            <h:outputText value="Датчики и контроллеры:" />
+                                            <h:outputText value="" />
+                                            <c:forEach var="sensor" items="#{facilityViewController.demoFacility.sensors}">
+                                                <h:outputText value="#{sensor.name}:"/>
+                                                <h:outputText value="#{sensor.value}" />
+                                            </c:forEach>
+                                        </c:if>
+                                    </h:panelGrid>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </c:if>
+            </div>
+            <c:if test="#{headerController.entered}">
+                <ezcomp:personal/>
+            </c:if>
+
+            <ezcomp:version/>
+    </h:body>
+</html>
+
+

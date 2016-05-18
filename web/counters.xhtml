@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>MicroSity</title>
+        <h:outputStylesheet library="css" name="layout1.css"/>
+        <script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript" />
+    </h:head>
+    <h:body>        
+        
+        <ezcomp:header/>
+        <div id="left_content">
+            <c:if test="#{!headerController.entered}">
+                <div class="div middle">
+                    <div class="imageNews" style="float: left;">
+                        <h:graphicImage library="images" name="content_picture/#{countersController.content.advertImage}" style="max-width: 256px;" />
+                    </div>
+                    <h:outputText class="widget_text_header" value="#{countersController.content.advertName}"/>
+                    <hr/>
+                    <h:outputText class="widget_text_main" value="#{countersController.content.advMainText}"/>
+                    <p:panel toggleable="true" collapsed="true" header="Подробнее" style="float: left;">
+                        <h:outputText value="#{countersController.content.advSubtitleText}" styleClass="moreText" />
+                    </p:panel>
+                </div>
+
+                <div class="div middle">
+                    <div >
+                        <h:graphicImage library="icons" name="counter-widget.png" styleClass="widget_icon" />
+                        <h:outputText value="Демо счетчик №1" styleClass="widget_text_header" />
+                    </div>
+                    <hr/>
+                    <div style="min-height: 150px;max-height: 256px;min-width: 256px;max-width: 256px;">
+                        <h:form>
+                            <p:poll update="watt" interval="30" />
+                            <h:panelGrid columns="2" id="watt" >
+                                <h:outputText value="Тип счетчика" />
+                                <h:outputText value="Ватт-метр" />
+                                <h:outputText value="Данные на начало месяца:" />
+                                <h:outputText value="#{countersController.DValue.start} kW" />
+                                <h:outputText value="Текущие данные:" />
+                                <h:outputText value="#{countersController.DValue.now} kW" />
+                                <h:outputText value="Итого за период:" />
+                                <h:outputText value="#{countersController.DValue.difference} kW" />
+                                <h:outputText value="Последне обновление:" />
+                                <h:outputText value="#{countersController.DValue.lastUpdate}" />                                
+                            </h:panelGrid>
+                            <p:chart type="line" model="#{countersController.DValue.model}" style="width: 360px;height: 180px;" /> 
+                        </h:form>
+                    </div>
+                </div>
+            </c:if>
+            <c:if test="#{headerController.entered}">
+                <c:if test="#{headerController.admin}">
+                    <h:form>
+                        <div class="div middle">
+                            <h:outputText value="Конструктор описания услуги" class="widget_text_header" />
+                            <h:panelGrid columns="1" class="constructTable">
+                                <h:panelGrid columns="2">
+                                    <h:outputText value="Заголовок  описания" />
+                                    <h:inputText value="#{countersController.content.advertName}" />
+
+                                    <h:graphicImage id="advImg" library="images" name="content_picture/#{countersController.content.advertImage}" style="max-width: 126px;" />
+                                    <h:panelGrid columns="1">
+                                        <h:outputText  value="Выберите изображение" />
+                                        <p:fileUpload auto="true" label="Изображение" fileUploadListener="#{countersController.content.setAdvertImage}" update="advImg"/>
+                                    </h:panelGrid>
+
+                                    <h:outputText value="Кратко опишите услугу"/>
+                                    <h:inputTextarea value="#{countersController.content.advMainText}" />
+
+                                    <h:outputText value="Опишите услугу полностью, или дополнительные данные"/>
+                                    <h:inputTextarea value="#{countersController.content.advSubtitleText}" />
+
+                                    <p:commandButton value="Обновить предпросмотр" update="@form" />
+                                    <p:commandButton value="Сохранить описание услуги" update="@all" actionListener="#{countersController.saveContent()}" />
+                                </h:panelGrid>
+                            </h:panelGrid>
+                        </div>
+
+                        <div id="preview" class="div middle">
+                            <div class="imageNews" style="float: left;">
+                                <h:graphicImage library="images" name="content_picture/#{countersController.content.advertImage}" style="max-width: 256px;" />
+                            </div>
+                            <h:outputText class="widget_text_header" value="#{countersController.content.advertName}"/>
+                            <hr/>
+                            <h:outputText class="widget_text_main" value="#{countersController.content.advMainText}"/>
+                            <p:panel toggleable="true" collapsed="true" header="Подробнее" style="float: left;">
+                                <h:outputText value="#{countersController.content.advSubtitleText}" styleClass="moreText" />
+                            </p:panel>
+                        </div>
+                    </h:form>
+
+                </c:if>
+                <c:if test="#{!headerController.admin}">
+                    <c:if test="#{!countersController.current.facilitys.isEmpty()}">
+                        <c:forEach var="facility" items="#{countersController.current.facilitys}">
+
+                            <c:if test="#{facility.cameras.isEmpty()}">
+                                <div class="div small">
+                                    <div>
+                                        <h:graphicImage library="icons" name="counter-widget.png" styleClass="widget_icon" />
+                                        <h:outputText value="Объект: #{facility.title}, счетчиков нет" styleClass="widget_text_header" />
+                                    </div>
+                                    <hr/>
+                                    <h:form>
+                                        <h:commandLink value="Новый счетчик" action="cameraWizard" disabled="true" />
+                                    </h:form>
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
+                    <c:if test="#{countersController.current.facilitys.isEmpty()}">
+                        <div class="div small">
+                            <div>
+                                <h:graphicImage library="icons" name="camera-widget.png" styleClass="widget_icon" />
+                                <h:outputText value="Не обнаружено зарегистрированных объектов" styleClass="widget_text_header" />
+                            </div>
+                            <hr/>
+                            <h:form>
+                                <h:commandLink value="Новый объект" action="facilityWizard" />
+                            </h:form>
+                        </div>
+                    </c:if>
+                </c:if>
+            </c:if>
+        </div>
+
+
+        <ezcomp:personal/>
+    </h:body>
+</html>
+
