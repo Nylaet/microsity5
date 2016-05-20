@@ -33,9 +33,7 @@ public class Sensor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @EJB
-    private SensorsDataFacade sdf;
-    
+          
     private String name;
     @Column(name="j_value")
     private String value;
@@ -77,20 +75,11 @@ public class Sensor implements Serializable {
     }
 
     public String getValue() {
+        value=Socket3Connection.getTemperature(address, port);
         return value;
     }
 
     public void setValue(String value) {
-        if(type==SensorType.SOCKET3){
-            SensorsData newValue=new SensorsData();
-            newValue.setDt(new Date());
-            newValue.setIsAction(false);
-            newValue.setPinNum(Short.valueOf("1"));
-            newValue.setSensorId("Socket3"+address+":"+port);
-            newValue.setValue(Socket3Connection.getTemperature(address, port));
-            newValue.setTiming(0);
-            sdf.create(newValue);
-        }
         this.value = value;
     }
 

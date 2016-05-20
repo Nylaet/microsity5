@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>MicroSity</title>
         <h:outputStylesheet library="css" name="layout1.css"/>
@@ -21,7 +23,35 @@
                             <h:outputText value="Новый датчик" class="widget_text_header" />
                         </div>
                         <hr/>
-                        <>
+                        <div>
+                            <h:form>
+                                <p:wizard>
+                                    <p:tab title="Объект">
+                                        <h:panelGrid columns="2" rendered="#{!headerController.current.facilitys.isEmpty()}">
+                                            <h:outputText value="Выберите объект"/>
+                                            <p:selectOneMenu value="#{sensorWizardController.facility}" converter="facilitySelectConverter" >
+                                                <c:forEach var="facility" items="#{headerController.current.facilitys}">
+                                                    <f:selectItem itemLabel="#{facility}" itemValue="#{facility}" />
+                                                </c:forEach>
+                                            </p:selectOneMenu>
+                                        </h:panelGrid>
+                                        <h:outputText value="Объектов не найдено. создайте новый объект" rendered="#{headerController.current.facilitys.isEmpty()}" />
+                                        <h:commandButton value="Добавить объект" action="facilityWizard.xhtml?faces-redirect=true" />
+                                    </p:tab>
+                                    <p:tab title="Датчик">
+                                        <h:panelGrid columns="2">
+                                            <h:outputText value="Название датчика" />
+                                            <h:inputText value="#{sensorWizardController.created.name}" />
+                                            <h:outputText value="IP адрес узла" />
+                                            <h:inputText value="#{sensorWizardController.created.address}" />
+                                            <h:outputText value="Порт" />
+                                            <h:inputText value="#{sensorWizardController.created.port}" />
+                                        </h:panelGrid>
+                                        <h:commandButton value="сохранить" action="#{sensorWizardController.create()}" />
+                                    </p:tab>
+                                </p:wizard>
+                            </h:form>
+                        </div>
                     </div>
                 </h:form>
             </c:if>

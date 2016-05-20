@@ -199,7 +199,7 @@ public class Facility implements Serializable {
 
     @Override
     public String toString() {
-        return "entitys.facility.Facility[ id=" + id + " ]";
+        return title;
     }
     
 }

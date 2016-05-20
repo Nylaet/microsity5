@@ -53,7 +53,13 @@ public class UpdateESPBase {
     
     public void myTimer() {
         System.out.println("Начинаем сканировать данные с esp");
-        List<SensorsData> data=sdf.findAll();
+        List<SensorsData> data=new ArrayList<>();
+        try{
+            data=sdf.findAll();
+        }catch(NullPointerException ex){
+            System.out.println("База пуста");
+            
+        }
         for (SensorsData sensorsData : data) {
             if(!sensorsData.getWasRead()){
                 boolean finded=false;
