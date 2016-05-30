@@ -35,6 +35,7 @@ public class Facility implements Serializable {
     private String street;
     private String home;
     private String appartament;
+    private String icon;
         
     private LatLng coord;
     
@@ -175,8 +176,15 @@ public class Facility implements Serializable {
     public void setRspbs(List<RSPB> rspbs) {
         this.rspbs = rspbs;
     }
-    
-       
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+              
     @Override
     public int hashCode() {
         int hash = 0;

@@ -26,6 +26,7 @@ public class Camera implements Serializable {
     private String name;
     private String vlcLink;
     private String JPGLink;
+    private String ip;
     @Column(name="j_size")
     private String size;
     private boolean showInTheMap;
@@ -84,6 +85,16 @@ public class Camera implements Serializable {
     public void setJPGLink(String JPGLink) {
         this.JPGLink = JPGLink;
     }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+    
+    
     
     
     

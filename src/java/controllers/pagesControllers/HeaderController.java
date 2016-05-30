@@ -121,6 +121,7 @@ public class HeaderController implements Serializable {
 
                     uf.edit(user);
                     FacesContext.getCurrentInstance().getPartialViewContext().getRenderIds().add("@all");
+                    if(user.getRole().equals(Role.CORP_USER))return "corporate/index.xhtml?faces-redirect=true";
                     return "index.xhtml?faces-redirect=true";
                 }
             }

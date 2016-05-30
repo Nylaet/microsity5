@@ -4,14 +4,15 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>MicroSity</title>
         <h:outputStylesheet library="css" name="layout1.css"/>
         <script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript" />
     </h:head>
     <h:body>        
-        
+
         <ezcomp:header/>
         <div id="left_content">
             <c:if test="#{!headerController.entered}">
@@ -33,7 +34,7 @@
                         <h:outputText value="Демо счетчик №1" styleClass="widget_text_header" />
                     </div>
                     <hr/>
-                    <div style="min-height: 150px;max-height: 256px;min-width: 256px;max-width: 256px;">
+                    <div style="min-height: 150px;min-width: 256px;max-width: 256px;">
                         <h:form>
                             <p:poll update="watt" interval="30" />
                             <h:panelGrid columns="2" id="watt" >
@@ -49,6 +50,31 @@
                                 <h:outputText value="#{countersController.DValue.lastUpdate}" />                                
                             </h:panelGrid>
                             <p:chart type="line" model="#{countersController.DValue.model}" style="width: 360px;height: 180px;" /> 
+                        </h:form>
+                    </div>
+                </div>
+
+                <div class="div middle">
+                    <div>
+                        <h:graphicImage library="icons" name="action-widget.png" styleClass="widget_icon" />
+                        <h:outputText value="Запланированные события" styleClass="widget_text_header" />
+                    </div>
+                    <hr/>
+                    <div>
+                        <h:form>
+                            <h:panelGrid columns="5" border="1" >
+                               <h:outputText value="Устройство"/>
+                               <h:outputText value="Условие"/>
+                               <h:outputText value="Значение"/>
+                               <h:outputText value="Действие"/>
+                               <h:outputText value="" />
+                               <h:outputText value="Демо счетчик №1" />
+                               <h:outputText value="Текущее значение больше" />
+                               <h:outputText value="61233" />
+                               <h:outputText value="Уведомление СМС" />
+                               <h:commandLink value="Изменить/Удалить" />
+                            </h:panelGrid>
+                            <h:commandButton value="Добавить задание" action="actionWizard.xhtml?faces-redirect=true" />
                         </h:form>
                     </div>
                 </div>

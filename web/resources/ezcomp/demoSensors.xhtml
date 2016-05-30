@@ -144,5 +144,48 @@
                 </h:form>
             </div>
         </div>
+        
+        <div class="div middle">
+                    <div>
+                        <h:graphicImage library="icons" name="action-widget.png" styleClass="widget_icon" />
+                        <h:outputText value="Запланированные события" styleClass="widget_text_header" />
+                    </div>
+                    <hr/>
+                    <div>
+                        <h:form>
+                            <h:panelGrid columns="5" border="1" >
+                               <h:outputText value="Устройство"/>
+                               <h:outputText value="Условие"/>
+                               <h:outputText value="Значение"/>
+                               <h:outputText value="Действие"/>
+                               <h:outputText value="" />
+                               <h:outputText value="Демо датчик №1" />
+                               <h:outputText value="Текущее значение больше" />
+                               <h:outputText value="24" />
+                               <h:outputText value="Включить Демо контроллер №1" />
+                               <h:commandLink value="Изменить/Удалить" />
+                               
+                               <h:outputText value="Демо датчик №1" />
+                               <h:outputText value="Текущее значение меньше" />
+                               <h:outputText value="20" />
+                               <h:outputText value="Выключить Демо контроллер №1" />
+                               <h:commandLink value="Изменить/Удалить" />
+                               
+                               <h:outputText value="Демо датчик №1" />
+                               <h:outputText value="Текущее значение больше" />
+                               <h:outputText value="24" />
+                               <h:outputText value="Уведомление СМС" />
+                               <h:commandLink value="Изменить/Удалить" />
+                               
+                               <h:outputText value="Демо датчик №1" />
+                               <h:outputText value="Текущее значение меньше" />
+                               <h:outputText value="20" />
+                               <h:outputText value="Уведомление СМС" />
+                               <h:commandLink value="Изменить/Удалить" />
+                            </h:panelGrid>
+                            <h:commandButton value="Добавить задание" action="actionWizard.xhtml?faces-redirect=true" />
+                        </h:form>
+                    </div>
+                </div>
     </cc:implementation>
 </html>

@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ezcomp="http://xmlns.jcp.org/jsf/composite/ezcomp"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>MicroSity Corporate Edition</title>
+        <h:outputStylesheet library="css" name="layout1.css"/>
+        <script src="http://maps.google.com/maps/api/js?sensor=true|false" type="text/javascript" />        
+    </h:head>
+    <h:body>
+        <ezcomp:corpHeader/>
+        <c:if test="#{headerController.entered}">
+            <div id="left_content">
+                <div class="div middle">
+                    <h:form>
+                        <c:if test="#{!corporateViewFacilityController.facility.cameras.isEmpty()}" >
+                            <p:poll interval="15" update="cams" />
+                            <p:panel id="cams">
+                                <c:forEach var="cam" items="#{corporateViewFacilityController.facility.cameras}" >
+                                    <h:panelGrid columns="1" border="1" >
+                                        <h:outputText value="#{cam.name}"/>
+                                        <p:graphicImage cache="false" style="max-width: 256px;" alt="Камера не доступна в данный момент"  
+                                                        value="#{cam.JPGLink}" />
+                                        <h:commandLink action="#{cam.vlcLink}" target="_new" value="Он-лайн просмотр" />
+                                    </h:panelGrid>
+                                </c:forEach>
+                            </p:panel>
+                        </c:if>
+                        <h:panelGrid columns="2">
+                            <h:outputText value="Название :" />
+                            <h:inputText value="#{corporateViewFacilityController.addedCamera.name}" />
+                            <h:outputText value="IP(:port) : " />
+                            <h:inputText value="#{corporateViewFacilityController.addedCamera.ip}"/>
+                            <f:facet name="footer">
+                                <p:commandButton actionListener="#{corporateViewFacilityController.saveCamera}" update="@all" value="Добавить камеру" />
+                            </f:facet>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </div>
+            <div class="right-static">
+                <div class="div middle">
+                    <div>
+                        <h:graphicImage alt="" library="icons" name="facility-icon.png" class="widget_icon" />
+                        <h:outputText value="#{corporateViewFacilityController.facility.title}" class="widget_text_header" />
+                    </div>
+                    <hr/>
+                    <div>
+                        <h:panelGrid columns="2">
+                            <f:facet name="header">
+                                <h:graphicImage alt="" class="widget_icon" library="icons" name="apply.png" />
+                                <h:outputText value="Холодильные витрины" />
+                            </f:facet>
+                            <h:outputText value="Витрина №1" />
+                            <h:outputText value="#{corporateViewFacilityController.randomTempSausage} &deg;C" />
+                            <h:outputText value="Витрина №2" />
+                            <h:outputText value="#{corporateViewFacilityController.randomTempSausage} &deg;C" />
+                            <h:outputText value="Витрина №3" />
+                            <h:outputText value="#{corporateViewFacilityController.randomTempSausage} &deg;C" />
+                            <h:outputText value="Витрина №4" />
+                            <h:outputText value="#{corporateViewFacilityController.randomTempSausage} &deg;C" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                            <f:facet name="header">
+                                <h:graphicImage class="widget_icon" alt="" library="icons" name="apply.png" />
+                                <h:outputText value="Двери" />
+                            </f:facet>
+                            <h:outputText value="Дверь №1" />
+                            <h:outputText value="Открыто" style="color:red"/>
+                            <h:outputText value="Дверь №2" />
+                            <h:outputText value="Закрыто" style="color:green" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                            <f:facet name="header">
+                                <h:graphicImage alt="" class="widget_icon" library="icons" name="apply.png" />
+                                <h:outputText value="Электросчетчики" />
+                            </f:facet>
+                            <h:outputText value="Общий счетчик" />
+                            <h:outputText value="За текущий месяц #{corporateViewFacilityController.mainWatt} kW" />
+                            <h:outputText value="Счетчик арендатора" />
+                            <h:outputText value="за текущий месяц #{corporateViewFacilityController.rentWatt} kW" />
+                        </h:panelGrid>
+                        <h:panelGrid columns="2">
+                            <f:facet name="header">
+                                <h:graphicImage class="widget_icon" alt="" library="icons" name="apply.png" />
+                                <h:outputText value="Посетители" />
+                            </f:facet>
+                            <h:outputText value="Всего за сутки" />
+                            <h:outputText value="#{corporateViewFacilityController.visitorsTotal}" />
+                            <h:outputText value="Сейчас" />
+                            <h:outputText value="#{corporateViewFacilityController.visitors}" />
+                        </h:panelGrid>
+                    </div>
+                </div>
+            </div>
+        </c:if>
+        <ezcomp:corpPersonal />
+    </h:body>
+</html>
+

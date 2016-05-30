@@ -10,7 +10,7 @@ package enums;
  * @author Panker
  */
 public enum Role {
-    ADMIN("Администратор"), USER("Пользователь");
+    ADMIN("Администратор"), USER("Пользователь"),CORP_USER("Корпоративный клиент");
     private String name;
 
     Role(String name) {

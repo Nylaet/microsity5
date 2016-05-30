@@ -14,7 +14,7 @@
     <cc:implementation>
         <c:if test="#{headerController.entered}">
             <c:if test="#{!headerController.admin}">
-                <div class="personal right-static" style="top:180px;">
+                <div class="personal right-static" style="top:190px;">
                     <div class="div">
                         <div>
                             <h:graphicImage library="icons" name="personal_data.png" class="widget_icon" />
@@ -34,11 +34,9 @@
                             <h:outputText value="#{personalController.endSubscription}" />
                         </div>
 
-                    </div>                    
-                </div>
-                <div class="personal right-static" style="top: 295px;">
+                    </div>       
                     <h:form>
-                        <div class="div">
+                        <div class="div" style="margin-top: 30px;">
                             <div>
                                 <h:graphicImage library="icons" name="facility-icon.png" class="widget_icon" />
                                 <h:outputText value="Объекты" class="widget_text_header" />
@@ -64,6 +62,7 @@
                         </div>
                     </h:form>
                 </div>
+                
             </c:if>
         </c:if>
     </cc:implementation>

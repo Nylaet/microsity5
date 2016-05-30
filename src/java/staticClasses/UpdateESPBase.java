@@ -92,6 +92,7 @@ public class UpdateESPBase {
         }
         init();
         System.out.println("Сканирование закончено");
+        
     }
 
     private void addNewData(UserSensorsDirectory userSensorsDirectory, SensorsData sensorsData) {
