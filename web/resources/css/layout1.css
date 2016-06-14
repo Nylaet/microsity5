@@ -9,26 +9,9 @@ and open the template in the editor.
 */
 @import url(https://fonts.googleapis.com/css?family=Ubuntu&subset=latin,cyrillic);
 
-body{
-    background-color: lightgray ;
-    font-size: 1vw!important; 
-}
 
-#topbar{
-    width: 100%;
-    height: 80px;
-    background: rgb(240,249,255);
-    background: -moz-linear-gradient(-45deg, lightgoldenrodyellow 0%, rgba(0,53,128,1) 45%, rgba(0,53,128,1) 100%);
-    background: -webkit-linear-gradient(-45deg, lightgoldenrodyellow 0%,rgba(0,53,128,1) 45%,rgba(0,53,128,1) 100%);
-    background: linear-gradient(135deg, lightgoldenrodyellow 0%,rgba(0,53,128,1) 45%,rgba(0,53,128,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#003580',GradientType=1 );
-    box-sizing: border-box;
-    padding: 0px 3em;
-    position: fixed;
-    top: 0px;
-    left:0px;
-    z-index: 999;
-}
+
+
 
 #logo{
     float: left;
@@ -45,6 +28,7 @@ body{
     float: right;
     height: 50px;
     padding-top: 3px;
+    margin-bottom: 3px;
 }
 
 .topbar_menu_item_icon{
@@ -84,7 +68,7 @@ body{
     box-sizing: border-box;
     padding: 0px 11rem;
     position: fixed;
-    top: 80px;;
+    top: 85px;;
     left:0px;
     z-index: 996;
     display: table;
@@ -162,8 +146,6 @@ body{
     border-radius: 3px;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
     float: left;
-    margin-left: 20px;
-    margin-top: 10px;
     padding: 10px 10px 15px 10px;
     width: 100%;
 }
@@ -173,6 +155,11 @@ body{
     min-height: 20px;    
 }
 
+.right-background-no-repeat{
+    background-position: bottom right;
+    background-size: 150px auto;
+    background-repeat: no-repeat; 
+}
 .middle{
     max-width: 450px;
 }
@@ -216,11 +203,6 @@ body{
     float: left;
 }
 
-#left_content{
-    top: 170px;
-    min-width: 59%;
-    max-width: 60%;
-}
 #auth{
     position: absolute;
     width: 600px;
@@ -339,4 +321,14 @@ body{
     .tr{
      border-bottom: 1px black solid;     
     }
+}
+
+.background-images{
+    position: fixed;
+    bottom: 2%; left:2%;
+    height: 100%; width: 50%;
+    z-index: -99;
+    background-size: 50% auto;
+    background-repeat: no-repeat;
+    background-position: left bottom;
 }

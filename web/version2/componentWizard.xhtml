@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:components="http://java.sun.com/jsf/composite/components"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:components="http://xmlns.jcp.org/jsf/composite/components">
+    <h:head>
+        <components:head/>
+    </h:head>
+    <h:body>
+        <components:header/>
+        <div id="left_content">
+           <c:if test="#{headerController.entered}">
+                <h:form>
+                    <div class="div big">
+                        <div>
+                            <h:graphicImage library="icons" name="wizard-icon.png" class="widget_icon" />
+                            <h:outputText value="Новый датчик/счетчик" class="widget_text_header" />
+                        </div>
+                        <hr/>
+                        <div>
+                            <h:panelGrid columns="3">
+                                <h:commandButton value="Новый счетчик" action="newCounter.xhtml?faces-redirect=true" disabled="true"  />
+                                <h:commandButton value="Новый дачик" action="newSensor.xhtml?faces-redirect=true" />
+                                <h:commandButton value="Новое управляющее устройство" action="newSensor.xhtml?faces-redirect=true" disabled="true" />
+                            </h:panelGrid>
+                        </div>
+                    </div>
+                </h:form>
+            </c:if>
+        </div>
+        <div id="right_content">
+            <components:personal/>
+        </div>
+        <div id="background_image" style="background-image: url(../resources/images/POMOSCH.jpg)"/>
+                    
+    </h:body>
+</html>

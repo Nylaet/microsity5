@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:components="http://java.sun.com/jsf/composite/components"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <components:head/>
+    </h:head>
+    <h:body>
+        <components:header/>
+        <div id="left_content">
+            <c:if test="#{!headerController.entered}">
+                <components:redirect/>
+            </c:if>
+            <c:if test="#{headerController.entered}">
+                <c:if test="#{headerController.entered}">
+                    <h:form>
+                        <div class="div big">
+                            <div>
+                                <h:graphicImage library="icons" name="wizard-icon.png" class="widget_icon" />
+                                <h:outputText value="Новый объект" class="widget_text_header" />
+                            </div>
+                            <hr/>
+                            <div>
+                                <p:wizard>
+                                    <p:tab title="Общие данные">
+                                        <p:panel>
+                                            <h:outputText value="Вас приветствует мастер добавления объектов." />
+                                            <h:outputText value="Пожалуйста, обязательно заполните все предложенные поля." />
+                                            <br/>
+                                            <h:panelGrid columns="2">
+                                                <h:outputText value="Назовите объект:"/>
+                                                <h:inputText value="#{facilityWizardPageController.created.title}" />
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:tab>
+                                    <p:tab title="Адрес">
+                                        <p:panel>
+                                            <h:outputText value="Определите местоположение объекта"/>
+                                            <h:panelGrid columns="2">
+                                                <h:outputText value="Страна:"/>
+                                                <h:inputText value="#{facilityWizardPageController.created.country}"/>
+                                                <h:outputText value="Город:"/>
+                                                <h:inputText value="#{facilityWizardPageController.created.sity}"/>
+                                                <h:outputText value="Улица:"/>
+                                                <h:inputText value="#{facilityWizardPageController.created.street}"/>
+                                                <h:outputText value="Дом:"/>
+                                                <h:inputText value="#{facilityWizardPageController.created.home}"/>
+                                                <h:outputText value="Квартира:"/>
+                                                <h:inputText value="#{facilityWizardPageController.created.appartament}"/>
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:tab>
+                                    <p:tab title="Устройства">
+                                        <h:outputText value="Укажите ID подключенных устройст MicroSityRSPB или MicroSityESP" />
+                                        <h:panelGrid columns="1">
+                                            <p:dataTable id="rspbs" var="rspb" value="#{facilityWizardPageController.created.rspbs}" emptyMessage="Записей не найдено" editable="true" editMode="cell" styleClass="widget_text_main">
+                                                <f:facet name="header">
+                                                    <h:outputText value="MicroSityRSPB" />
+                                                </f:facet>
+                                                <p:column>
+                                                    <p:cellEditor>
+                                                        <f:facet name="output">
+                                                            <h:outputText value="#{rspb.microsity_id}"/>
+                                                        </f:facet>
+                                                        <f:facet name="input">
+                                                            <h:inputText value="#{rspb.microsity_id}" />
+                                                        </f:facet>
+                                                    </p:cellEditor>
+                                                </p:column>
+                                                <p:column style="width: 12px;">
+                                                    <p:commandLink actionListener="#{facilityWizardPageController.created.rspbs.remove(rspb)}" update="rspbs">
+                                                        <h:graphicImage library="icons" name="decline.png" style="width: 10px;" />
+                                                    </p:commandLink>
+                                                </p:column>
+                                            </p:dataTable>
+                                            <br/>
+                                            <p:commandButton value="Добавить" actionListener="#{facilityWizardPageController.addRSPB()}" update="rspbs" styleClass="widget_button_inside" />
+                                            <hr/>
+                                            <p:dataTable id="esps" var="esp" value="#{facilityWizardPageController.created.esps}" emptyMessage="Записей не найдено" editable="true" editMode="cell" styleClass="widget_text_main">
+                                                <f:facet name="header">
+                                                    <h:outputText value="MicroSityESP" />
+                                                </f:facet>
+                                                <p:column>
+                                                    <p:cellEditor>
+                                                        <f:facet name="output">
+                                                            <h:outputText value="#{esp.microsity_id}"/>
+                                                        </f:facet>
+                                                        <f:facet name="input">
+                                                            <h:inputText value="#{esp.microsity_id}" />
+                                                        </f:facet>
+                                                    </p:cellEditor>
+                                                </p:column>
+                                                <p:column style="width: 12px;">
+                                                    <p:commandLink actionListener="#{facilityWizardPageController.created.esps.remove(esp)}" update="esps">
+                                                        <h:graphicImage library="icons" name="decline.png" style="width: 10px;" />
+                                                    </p:commandLink>
+                                                </p:column>
+                                            </p:dataTable>
+                                            <br/>
+                                            <p:commandButton value="Добавить" actionListener="#{facilityWizardPageController.addESP()}" update="esps" styleClass="widget_button_inside" />
+
+                                        </h:panelGrid>
+                                    </p:tab>
+                                    <p:tab title="Подтверждение">
+                                        <p:panel>
+                                            <h:outputText value="Проверьте правильность введеной Вами информации, при необходимости вернитесь и исправьте"/>
+                                            <h:panelGrid columns="2" >
+                                                <h:outputText value="#{facilityWizardPageController.created.title}" />
+                                                <h:outputText value="" />
+                                                <h:outputText value="Показывать на карте:" />
+                                                <h:selectBooleanCheckbox value="#{facilityWizardPageController.created.showInTheMap}" />
+                                                <br/>
+                                                <p:gmap center="#{facilityWizardPageController.getLatLng()}"
+                                                        zoom="15" type="hybrid" draggable="false" disableDefaultUI="true" 
+                                                        disableDoubleClickZoom="true" navigationControl="false" 
+                                                        mapTypeControl="false" style="width: 250px;height: 250px;"
+                                                        model="#{facilityWizardPageController.model}"/>
+                                                <h:outputText value="Подключенные устройства:" />
+                                                <div>
+                                                    <h:panelGrid columns="2">
+                                                        <h:outputText value="MicroSityRSPB:" />
+                                                        <p:panel>
+                                                            <c:forEach var="rspb" items="#{facilityWizardPageController.created.rspbs}" />
+                                                            <h:outputText value="#{rspb.microsity_id}" /><br/>
+                                                        </p:panel>
+                                                        <h:outputText value="MicroSityESP:" />
+                                                        <p:panel>
+                                                            <c:forEach var="esp" items="#{facilityWizardPageController.created.esps}" />
+                                                            <h:outputText value="#{esp.microsity_id}" /><br/>
+                                                        </p:panel>
+                                                    </h:panelGrid>
+                                                </div>
+                                                <h:outputText value="Примечания к объекту:" />
+                                                <h:inputTextarea value="#{facilityWizardPageController.created.about}" />
+                                                <br/>
+                                                <p:commandButton action="#{facilityWizardPageController.createFacility()}"
+                                                                 value="Всё верно!" />
+                                            </h:panelGrid>
+                                        </p:panel>
+                                    </p:tab>
+                                </p:wizard>
+                            </div>
+                        </div>
+                    </h:form>
+                </c:if>
+            </c:if>
+        </div>
+        <div id="right_content">
+            <c:if test="#{!headerController.entered}">
+            </c:if>
+            <c:if test="#{headerController.entered}">
+                <components:personal />
+            </c:if>
+        </div>
+        <div id="background_image" style="background-image: url(../resources/images/POMOSCH.jpg)"/>
+
+    </h:body>
+</html>

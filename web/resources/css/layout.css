@@ -1,0 +1,60 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14.06.2016, 12:02:00
+    Author     : Panker-RDP
+*/
+
+body{
+    background-color: lightgray ;
+    font-size: 1vw!important; 
+}
+
+#topbar{
+    width: 100%;
+    height: 85px;
+    background: rgb(240,249,255);
+    background: -moz-linear-gradient(-45deg, lightgoldenrodyellow 0%, rgba(0,53,128,1) 45%, rgba(0,53,128,1) 100%);
+    background: -webkit-linear-gradient(-45deg, lightgoldenrodyellow 0%,rgba(0,53,128,1) 45%,rgba(0,53,128,1) 100%);
+    background: linear-gradient(135deg, lightgoldenrodyellow 0%,rgba(0,53,128,1) 45%,rgba(0,53,128,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#003580',GradientType=1 );
+    box-sizing: border-box;
+    padding: 0px 3em;
+    position: fixed;
+    top: 0px;
+    left:0px;
+    z-index: 999;
+}
+#left_content{
+    position: fixed;
+    top: 180px;
+    left: 2%;
+    float: left;
+    max-width: 60%;
+    padding-left:5px;
+}
+#right_content{
+    position: fixed;
+    top: 180px;
+    right: 2%;
+    float: right;
+    max-width: 40%;
+    padding-right: 5px;
+}
+#background_image{
+    z-index: -9;
+    position: fixed;
+    left:5%;
+    bottom: 5%;
+    width: 50%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 80% auto;
+}
+#footer{
+
+}

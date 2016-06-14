@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:components="http://java.sun.com/jsf/composite/components"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <components:head/>
+    </h:head>
+    <h:body>
+        <components:header/>
+        <div id="left_content">
+           <div class="div big">
+                <div>
+                    <h:graphicImage library="icons" name="wizard-icon.png" styleClass="widget_icon" />
+                    <h:outputText value="Мастер создания событий"/>
+                </div>
+                <hr/>
+                <div>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <p:selectOneMenu id="requisition" value="#{actionWizardController.requisition}">
+                                <f:selectItem itemLabel="Выберите событие" itemValue=""  />
+                                <f:selectItem itemLabel="Тревога" itemValue="Тревога"  />
+                                <f:selectItem itemLabel="Тревога снята" itemValue="Тревога снята"  />
+                            </p:selectOneMenu>
+                            <p:selectOneMenu value="#{actionWizardController.action}" id="action">
+                                <f:selectItem itemLabel="Выберите действие" itemValue="" />
+                                <f:selectItem itemLabel="Включить Демо контроллер №1 " itemValue="Включить Демо контроллер №1" />
+                                <f:selectItem itemLabel="Выключить Демо контроллер №1 " itemValue="Выключить Демо контроллер №1" />
+                                <f:selectItem itemLabel="Отправить СМС на номер пользователя" itemValue="Отправить СМС на номер пользователя" />
+                                <f:selectItem itemLabel="Отправить СМС на номера пользовательской рассылки" itemValue="Отправить СМС на номера пользовательской рассылки" />
+                                <f:selectItem itemLabel="Отправить E-Mail уведомление пользователю" itemValue="Отправить E-Mail уведомление пользователю" />
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        <h:commandButton value="Сохранить" />
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <div id="right_content">
+            
+        </div>
+        <div id="background_image" style="background-image: url(../resources/images/POMOSCH.jpg)"/>
+                    
+    </h:body>
+</html>

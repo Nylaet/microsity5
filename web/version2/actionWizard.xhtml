@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:components="http://java.sun.com/jsf/composite/components"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <components:head/>
+    </h:head>
+    <h:body>
+        <components:header/>
+        <div id="left_content">
+           <div class="div big">
+                <div>
+                    <h:graphicImage library="icons" name="wizard-icon.png" styleClass="widget_icon" />
+                    <h:outputText value="Мастер создания событий"/>
+                </div>
+                <hr/>
+                <div>
+                    <h:form>
+                        <p:tab title="Создайте событие">
+                            <h:panelGrid columns="1" >
+                                <p:selectOneMenu value="#{actionWizardController.device}" valueChangeListener="#{actionWizardController.update(requisition)}" >
+                                    <f:selectItem itemLabel="Выберите устройство" itemValue="" />
+                                    <f:selectItem itemLabel="Демо счетчик №1" itemValue="Демо счетчик №1" />
+                                    <f:selectItem itemLabel="Демо датчик №1" itemValue="Демо датчик №1" />
+                                    <f:selectItem itemLabel="Демо датчик №2 PowerMax: Тревожная кнопка №1" itemValue="Демо датчик №2 PowerMax: Тревожная кнопка 1" />
+                                    <f:selectItem itemLabel="Демо датчик №2 PowerMax: Тревожная кнопка №2" itemValue="Демо датчик №2 PowerMax: Тревожная кнопка 2" />
+                                    <f:selectItem itemLabel="Демо датчик №2 PowerMax: Открытие двери" itemValue="Демо датчик №2 PowerMax: Открытие двери" />
+                                    <f:selectItem itemLabel="Демо датчик №2 PowerMax: Затопление" itemValue="Демо датчик №2 PowerMax: Затопление" />
+                                    <f:selectItem itemLabel="Демо датчик №2 PowerMax: Разряжена батарея" itemValue="Демо датчик №2 PowerMax: Разряжена батарея" />
+                                </p:selectOneMenu>
+                                <h:commandButton value="Дальше" action="#{actionWizardController.next}" />
+
+                            </h:panelGrid>
+                        </p:tab>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <div id="right_content">
+            
+        </div>
+        <div id="background_image" style="background-image: url(../resources/images/POMOSCH.jpg)"/>
+                    
+    </h:body>
+</html>

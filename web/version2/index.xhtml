@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:components="http://java.sun.com/jsf/composite/components"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <components:head/>
+    </h:head>
+    <h:body>
+        <components:header/>
+        <div id="left_content">
+            <c:if test="#{headerController.entered}">
+                <c:if test="#{headerController.admin}">
+                    <c:forEach var="news" items="#{indexController.newses}">
+                        <div class="div middle">
+                            <h:form>
+                                <div class="div middle" style="float:left;width: 40%">
+                                    <div>
+                                        <h:graphicImage id="icon#{news.id}" library="icons" name="#{news.iconName}" styleClass="widget_icon" />
+                                        <h:outputText id="title#{news.id}" value="#{news.title}" styleClass="widget_text_header" />                                        
+                                    </div>
+                                    <hr/>
+                                    <div>
+                                        <div class="imageNews" style="float: left;">
+                                            <h:graphicImage library="images" name="news_picture/#{news.imageNews}" style="max-width: 126px;" id="image#{news.id}" />
+                                        </div>
+                                        <h:outputText value="#{news.newsText}" styleClass="newsText" id="text#{news.id}"/>
+                                        <br/>
+                                        <hr/>
+                                        <p:panel toggleable="true" collapsed="false" header="Подробнее" style="float: left;" id="more#{news.id}">
+                                            <h:outputText value="#{news.moreText}" styleClass="moreText" />
+                                        </p:panel>
+                                    </div>
+                                </div>
+                                <div class="div middle" style="float:right;width: 40%">
+                                    <h:panelGrid columns="1">
+
+                                        <h:commandButton type="button" value="Изменить иконку" id="iconNews#{news.id}" />
+
+                                        <p:inputText value="#{news.title}"   styleClass="widget_text_header">
+                                            <p:ajax event="keyup" update="title#{news.id}" />
+                                        </p:inputText>
+
+                                        <p:fileUpload auto="true" label="Выберите файл" fileUploadListener="#{news.setImageNews}" update="image#{news.id}" />
+
+                                        <p:inputTextarea value="#{news.newsText}" styleClass="widget_text_main">
+                                            <p:ajax event="keyup" update="text#{news.id}" />
+                                        </p:inputTextarea>
+
+                                        <p:inputTextarea value="#{news.moreText}" styleClass="widget_text_main">
+                                            <p:ajax event="keyup" update="more#{news.id}" />
+                                        </p:inputTextarea>
+                                        <h:panelGrid columns="2">
+                                            <h:commandButton value="Сохранить" action="#{indexController.editNews(news)}" />
+                                            <h:commandButton value="Удалить" action="#{indexController.deleteNews(news)}" />
+                                        </h:panelGrid>
+                                    </h:panelGrid>
+                                </div>
+
+                                <p:overlayPanel for="iconNews#{news.id}" styleClass="overlay">
+                                    <h:panelGrid columns="6">
+                                        <c:forEach var="icon" items="#{indexController.iconsList}">
+                                            <p:commandLink actionListener="#{news.setIconName(icon)}" update="icon#{news.id}">
+                                                <h:graphicImage library="icons" name="#{icon}" styleClass="widget_icon"/>
+                                            </p:commandLink>
+                                        </c:forEach>
+                                    </h:panelGrid>
+                                </p:overlayPanel>
+
+                            </h:form>
+                        </div>
+                    </c:forEach>
+                    <div class="div middle">
+                        <h:outputText value="Пустая новость" />
+
+                        <h:form>
+
+                            <div class="div middle" style="float:left;width: 40%">
+                                <div>
+                                    <h:graphicImage id="icon#{indexController.addedNews.id}" library="icons" name="#{indexController.addedNews.iconName}" styleClass="widget_icon" />
+                                    <h:outputText id="title#{indexController.addedNews.id}" value="#{indexController.addedNews.title}" styleClass="widget_text_header" />                                        
+                                </div>
+                                <hr/>
+                                <div>
+                                    <div class="imageNews" style="float: left;">
+                                        <h:graphicImage library="images" name="news_picture/#{indexController.addedNews.imageNews}" style="max-width: 126px;" id="image#{indexController.addedNews.id}" />
+                                    </div>
+                                    <h:outputText value="#{indexController.addedNews.newsText}" styleClass="newsText" id="text#{indexController.addedNews.id}"/>
+                                    <br/>
+                                    <hr/>
+                                    <p:panel toggleable="true" collapsed="false" header="Подробнее" style="float: left;" id="more#{indexController.addedNews.id}">
+                                        <h:outputText value="#{indexController.addedNews.moreText}" styleClass="moreText" />
+                                    </p:panel>
+                                </div>
+                            </div>
+                            <div class="div middle" style="float:right;width: 40%">
+                                <h:panelGrid columns="1">
+
+                                    <h:commandButton type="button" value="Изменить иконку" id="iconNews#{news.id}" />
+
+                                    <p:inputText value="#{indexController.addedNews.title}"   styleClass="widget_text_header">
+                                        <p:ajax event="keyup" update="title#{indexController.addedNews.id}" />
+                                    </p:inputText>
+
+                                    <p:fileUpload auto="true" label="Выберите файл" fileUploadListener="#{indexController.addedNews.setImageNews}" update="image#{indexController.addedNews.id}" />
+
+                                    <p:inputTextarea value="#{indexController.addedNews.newsText}" styleClass="widget_text_main">
+                                        <p:ajax event="keyup" update="text#{indexController.addedNews.id}" />
+                                    </p:inputTextarea>
+
+                                    <p:inputTextarea value="#{indexController.addedNews.moreText}" styleClass="widget_text_main">
+                                        <p:ajax event="keyup" update="more#{indexController.addedNews.id}" />
+                                    </p:inputTextarea>
+                                    <h:panelGrid columns="2">
+                                        <h:commandButton value="Сохранить" action="#{indexController.editNews(news)}" />
+                                        <h:commandButton value="Удалить" action="#{indexController.deleteNews(news)}" />
+                                    </h:panelGrid>
+                                </h:panelGrid>
+                            </div>
+
+                            <p:overlayPanel for="iconNews#{indexController.addedNews.id}" styleClass="overlay">
+                                <h:panelGrid columns="6">
+                                    <c:forEach var="icon" items="#{indexController.iconsList}">
+                                        <p:commandLink actionListener="#{indexController.addedNews.setIconName(icon)}" update="icon#{indexController.addedNews.id}">
+                                            <h:graphicImage library="icons" name="#{icon}" styleClass="widget_icon"/>
+                                        </p:commandLink>
+                                    </c:forEach>
+                                </h:panelGrid>
+                            </p:overlayPanel>
+
+                        </h:form>
+                    </div>
+                </c:if>                
+            </c:if>
+        </div>
+        <div id="right_content">
+            <c:forEach var="news" items="#{indexController.newses}">
+                    <div class="div middle">
+                        <div>
+                            <h:graphicImage library="icons" name="#{news.iconName}" styleClass="widget_icon" />
+                            <h:outputText value="#{news.title}" styleClass="widget_text_header" />
+                        </div>
+                        <hr/>
+                        <div>
+                            <div class="imageNews" style="float: left;">
+                                <h:graphicImage  library="images" name="news_picture/#{news.imageNews}" style="max-width: 126px;" />
+                            </div>
+                            <h:outputText value="#{news.newsText}" styleClass="newsText"/>
+                            <br/>
+                            <hr/>
+                            <p:panel toggleable="true" collapsed="true" header="Подробнее" style="float: left;">
+                                <h:outputText value="#{news.moreText}" styleClass="moreText" />
+                            </p:panel>
+                        </div>
+                    </div>
+                </c:forEach>
+        </div>
+        <div id="background_image" style="background-image: url(../resources/images/743.png)"/>
+                    
+    </h:body>
+</html>
+

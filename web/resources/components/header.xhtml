@@ -1,0 +1,287 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <p:growl autoUpdate="true" />
+        <div id="topbar">
+            <div id="logo">
+                <h:graphicImage library="images" name="logo2.png" styleClass="logo_image" />
+            </div>
+            <div id="topbar_menu">
+                <c:if test="#{!headerController.entered}">
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Эл. адрес" styleClass="topbar_menu_item_text" />
+                                <h:outputText value="Пароль" styleClass="topbar_menu_item_text" />
+                                <h:inputText value="#{headerController.enterLogMail}" />
+                                <h:inputSecret value="#{headerController.enterPass}" />
+                                <h:panelGrid columns="2">
+                                    <h:selectBooleanCheckbox value="#{headerController.remMe}"/>
+                                    <h:outputText value="Запомнить меня" styleClass="topbar_menu_item_text"/>
+                                </h:panelGrid>
+                                <h:panelGrid columns="2">
+                                    <h:commandLink action="loginPage.xhtml?faces-redirect=true" value="Забыли пароль?" styleClass="topbar_menu_item_text" />
+                                    <h:commandLink action="registrationPage" value="Регистрация" styleClass="topbar_menu_item_text" />
+                                </h:panelGrid>
+                            </h:panelGrid>
+                            <h:commandLink action="#{headerController.login()}" styleClass="topbar_menu_item">
+                                <div>
+                                    <h:graphicImage library="icons" name="login.png" class="topbar_menu_item_icon shaked"/>
+                                    <br/>
+                                    <h:outputText value="Войти" styleClass="topbar_menu_item_text" />    
+                                </div>
+
+                            </h:commandLink>
+                        </h:panelGrid>
+                    </h:form>
+                </c:if>
+                <c:if test="#{headerController.entered}">
+                    <c:if test="#{!headerController.admin}">
+                        <div id="topbar_menu">
+                            <h:form>
+                                <h:panelGrid columns="3">
+                                    <p:commandLink action="profile.xhtml?faces-redirect=true"  styleClass="topbar_menu_item">
+                                        <div>
+                                            <h:graphicImage library="icons" name="profile.png" class="topbar_menu_item_icon" /><br/>
+                                            <h:outputText value="Профиль" styleClass="topbar_menu_item_text" />
+                                        </div>
+                                    </p:commandLink>
+                                    <p:commandLink id="mess" action="messages.xhtml?faces-redirect=true"  styleClass="topbar_menu_item" >
+                                        <div>
+                                            <p:poll delay="1000" update="mess"/>
+                                            <h:graphicImage library="icons" name="messages.png" class="topbar_menu_item_icon shaked" rendered="#{headerController.haveNewMessage}"/>
+                                            <h:graphicImage library="icons" name="messages.png" class="topbar_menu_item_icon" rendered="#{!headerController.haveNewMessage}"/>
+                                            <br/>
+                                            <h:outputText value="Сообщения" styleClass="topbar_menu_item_text" />
+                                        </div>
+                                    </p:commandLink>
+                                    <h:commandLink action="#{headerController.logout()}" class="topbar_menu_item">
+                                        <div>
+                                            <h:graphicImage library="icons" name="exit.png" class="topbar_menu_item_icon"/><br/>
+                                            <h:outputText value="Выход" styleClass="topbar_menu_item_text" />
+                                        </div>
+                                    </h:commandLink>
+                                </h:panelGrid>
+                            </h:form>
+                        </div>
+                    </c:if>
+                    <c:if test="#{headerController.admin}">
+                        <div id="topbar_menu">
+                            <h:form>
+                                <h:panelGrid columns="4">
+                                    <p:commandLink action="logRead.xhtml?faces-redirect=true"  styleClass="topbar_menu_item">
+                                        <div>
+                                            <h:graphicImage library="icons" name="log.png" class="topbar_menu_item_icon" /><br/>
+                                            <h:outputText value="Лог" styleClass="topbar_menu_item_text" />
+                                        </div>
+                                    </p:commandLink>
+                                    <p:commandLink id="mess" action="messages.xhtml?faces-redirect=true"  styleClass="topbar_menu_item" >
+                                        <div>
+                                            <p:poll delay="1000" update="mess"/>
+                                            <h:graphicImage library="icons" name="messages.png" class="topbar_menu_item_icon shaked" rendered="#{headerController.haveNewMessage}"/>
+                                            <h:graphicImage library="icons" name="messages.png" class="topbar_menu_item_icon" rendered="#{!headerController.haveNewMessage}"/>
+                                            <br/>
+                                            <h:outputText value="Сообщения" styleClass="topbar_menu_item_text" />
+                                        </div>
+                                    </p:commandLink>
+                                    <h:commandLink action="#{headerController.logout()}" class="topbar_menu_item">
+                                        <div>
+                                            <h:graphicImage library="icons" name="exit.png" class="topbar_menu_item_icon"/><br/>
+                                            <h:outputText value="Выход" styleClass="topbar_menu_item_text" />
+                                        </div>
+                                    </h:commandLink>
+                                </h:panelGrid>
+                            </h:form>
+                        </div>
+                    </c:if>
+                </c:if>
+            </div>
+            <div id="layout_menu_cover">
+                <c:if test="#{!headerController.admin}" >
+                    <h:form>
+                        <ul id="layout_menu_ul">
+                            <li class="layout_menu_cover_items" style="border-left:  1px solid rgba(255, 255, 255, 0.15);">
+                                <p:commandLink class="layout_menu_cover_link" action="index.xhtml?faces-redirect=true">                                                          
+                                    <h:graphicImage library="icons" name="home.png" class="topbar_menu_item_icon" style="height: 25px; margin-top: 15px;" /><br/>
+                                    <h:outputText value="Главная" class="layout_menu_text"/>                           
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="cameras.xhtml?faces-redirect=true"   >                            
+                                    <h:graphicImage library="icons" name="camera.png" class="topbar_menu_item_icon" /><br/>
+                                    <h:outputText value="Камеры" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="counters.xhtml?faces-redirect=true"  >
+                                    <h:graphicImage library="icons" name="counters.png" class="topbar_menu_item_icon" /><br/>
+                                    <h:outputText value="Счетчики" class="layout_menu_text"/> 
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="sensors.xhtml?faces-redirect=true"   >                                                           
+                                    <h:graphicImage library="icons" name="sensors.png" class="topbar_menu_item_icon" /><br/>
+                                    <h:outputText value="Датчики" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                            
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="rControl.xhtml?faces-redirect=true"   >                                                         
+                                    <h:graphicImage library="icons" name="rControl.png" class="topbar_menu_item_icon" /> <br/>
+                                    <h:outputText value="Управление" class="layout_menu_text" />                            
+                                </p:commandLink>
+                            </li>
+                            
+                            <li class="layout_menu_cover_items"   >
+                                <p:commandLink class="layout_menu_cover_link" action="health.xhtml?faces-redirect=true" >                                                    
+                                    <h:graphicImage library="icons" name="health-satelite.png" class="topbar_menu_item_icon" /><br/>
+                                    <h:outputText value="Биометрия" class="layout_menu_text" />                            
+                                </p:commandLink>
+                            </li>
+                            
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="gps.xhtml?faces-redirect=true"   >                                                         
+                                    <h:graphicImage library="icons" name="gps.png" class="topbar_menu_item_icon" /> <br/>
+                                    <h:outputText value="GPS" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link"  >                                                         
+                                    <h:graphicImage library="icons" name="maps.png" class="topbar_menu_item_icon" /> <br/>
+                                    <h:outputText value="Карта событий" class="layout_menu_text" style="white-space: nowrap;"/>                      
+                                </p:commandLink>
+                            </li>
+                        </ul>
+                    </h:form>
+                </c:if>
+                <c:if test="#{headerController.admin}" >
+                    <h:form>
+                        <ul id="layout_menu_ul">
+                            <li class="layout_menu_cover_items" style="border-left:  1px solid rgba(255, 255, 255, 0.15);">
+                                <p:commandLink class="layout_menu_cover_link" action="index.xhtml?faces-redirect=true">                                                          
+                                    <h:graphicImage library="icons" name="home.png" class="topbar_menu_item_icon" style="height: 25px; margin-top: 15px;" /><br/>
+                                    <h:outputText value="Главная страница" class="layout_menu_text"/>                           
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="cameras.xhtml?faces-redirect=true"   >                            
+                                    <h:graphicImage library="icons" name="camera.png" class="topbar_menu_item_icon" /><br/>
+                                    <h:outputText value="Камеры страница" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="counters.xhtml?faces-redirect=true"  >
+                                    <h:graphicImage library="icons" name="counters.png" class="topbar_menu_item_icon" /><br/>
+                                    <h:outputText value="Счетчики страница" class="layout_menu_text"/> 
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="sensors.xhtml?faces-redirect=true"   >                                                           
+                                    <h:graphicImage library="icons" name="sensors.png" class="topbar_menu_item_icon" /><br/>
+                                    <h:outputText value="Датчики страница" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                            
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="rControl.xhtml?faces-redirect=true"   >                                                         
+                                    <h:graphicImage library="icons" name="rControl.png" class="topbar_menu_item_icon" /> <br/>
+                                    <h:outputText value="управление страница" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                            
+                            <li class="layout_menu_cover_items"   >
+                                <p:commandLink class="layout_menu_cover_link" action="health.xhtml?faces-redirect=true" >                                                    
+                                    <h:graphicImage library="icons" name="health-satelite.png" class="topbar_menu_item_icon" /><br/>
+                                    <h:outputText value="Биометрия" class="layout_menu_text" />                            
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="gps.xhtml?faces-redirect=true"   >                                                         
+                                    <h:graphicImage library="icons" name="gps.png" class="topbar_menu_item_icon" /> <br/>
+                                    <h:outputText value="GPS страница" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" actionListener="maps.xhtml?faces-redirect=true"   >                                                         
+                                    <h:graphicImage library="icons" name="maps.png" class="topbar_menu_item_icon" /> <br/>
+                                    <h:outputText value="Карта " class="layout_menu_text"/> 
+                                    <h:outputText value="событий страница" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                        </ul>
+                        <ul id="layout_menu_ul">
+                            <li class="layout_menu_cover_items" style="border-left:  1px solid rgba(255, 255, 255, 0.15);">
+                                <p:commandLink class="layout_menu_cover_link" action="clients.xhtml?faces-redirect=true">                                                          
+                                    <h:graphicImage library="icons" name="users-white.png" class="topbar_menu_item_icon" style="height: 25px; margin-top: 15px;" /><br/>
+                                    <h:outputText value="База " class="layout_menu_text"/><br/>                           
+                                    <h:outputText value="клиентов" class="layout_menu_text"/>                           
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="rspbHome.xhtml?faces-redirect=true"   >                            
+                                    <h:graphicImage library="icons" name="rasp-white.png" class="topbar_menu_item_icon" /><br/>
+                                    <h:outputText value="RaspberryHome" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="espHome.xhtml?faces-redirect=true"  >
+                                    <h:graphicImage library="icons" name="esp-white.png" class="topbar_menu_item_icon" /><br/>
+                                    <h:outputText value="ESPHome" class="layout_menu_text"/> 
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="rControl.xhtml?faces-redirect=true"   >                                                         
+                                    <h:graphicImage library="icons" name="rControl.png" class="topbar_menu_item_icon" /> <br/>
+                                    <h:outputText value="управление" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                            
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="health.xhtml?faces-redirect=true" >                                                    
+                                    <h:graphicImage library="icons" name="health-satelite.png" class="topbar_menu_item_icon" /><br/>
+                                    <h:outputText value="Биометрия" class="layout_menu_text" />                            
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="gps"   >                                                         
+                                    <h:graphicImage library="icons" name="gps.png" class="topbar_menu_item_icon" /> <br/>
+                                    <h:outputText value="GPS" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" action="gps"   >                                                         
+                                    <h:graphicImage library="icons" name="servers-white.png" class="topbar_menu_item_icon" /> <br/>
+                                    <h:outputText value="Сервера" class="layout_menu_text"/>                            
+                                </p:commandLink>
+                            </li>
+                            <li class="layout_menu_cover_items">
+                                <p:commandLink class="layout_menu_cover_link" actionListener="maps"   >                                                         
+                                    <h:graphicImage library="icons" name="finance-white.png" class="topbar_menu_item_icon" /> <br/>
+                                    <h:outputText value="Финансы " class="layout_menu_text"/> 
+                                </p:commandLink>
+                            </li>
+                        </ul>
+                    </h:form>
+
+                </c:if>
+            </div>
+        </div>
+        <c:if test="#{headerController.admin}">
+            <div id="emptybox_admin"/>
+        </c:if>
+        <c:if test="#{!headerController.admin}">
+            <div id="emptybox"/>
+        </c:if>
+    </cc:implementation>
+</html>
