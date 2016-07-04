@@ -68,7 +68,7 @@ and open the template in the editor.
     box-sizing: border-box;
     padding: 0px 11rem;
     position: fixed;
-    top: 85px;;
+    top: 90px;;
     left:0px;
     z-index: 996;
     display: table;
@@ -161,7 +161,7 @@ and open the template in the editor.
     background-repeat: no-repeat; 
 }
 .middle{
-    max-width: 450px;
+    
 }
 
 .small{
@@ -179,11 +179,10 @@ and open the template in the editor.
 
 #emptybox{
     margin-top: 180px;
-    min-width: 99%;
-    float: left;
+    min-width: 99%;    
 }
 #emptybox_admin{
-    margin-top: 280px;
+    margin-top: 300px;
     min-width: 99%;
     float: left;
 }

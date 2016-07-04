@@ -126,7 +126,7 @@ public class HeaderController implements Serializable {
                 }
             }
         }
-        return "loginError";
+        return "loginPage.xhtml?faces-redirect=true";
     }
 
     public String logout() {

@@ -130,25 +130,25 @@ public class CountersController implements Serializable {
             update();
         }
 
-        public double getStart() {
+        public String getStart() {
             update();
-            return start;
+            return normalize(start);
         }
 
         public void setStart(int start) {
             this.start = start;
         }
 
-        public double getNow() {
-            return now;
+        public String getNow() {
+            return normalize(now);
         }
 
         public void setNow(int now) {
             this.now = now;
         }
 
-        public double getDifference() {
-            return difference;
+        public String getDifference() {
+            return normalize(difference);
         }
 
         public void setDifference(int difference) {
@@ -204,6 +204,10 @@ public class CountersController implements Serializable {
 
                 lastUpdate = df.format(last);
             }
+        }
+
+        private String normalize(double start) {
+            return String.valueOf(Math.round(start));
         }
 
     }

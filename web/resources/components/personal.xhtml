@@ -13,7 +13,7 @@
     <!-- IMPLEMENTATION -->
     <cc:implementation>
         <c:if test="#{headerController.entered}">
-            <div class="div">
+            <div >
                 <div>
                     <h:graphicImage library="icons" name="personal_data.png" class="widget_icon" />
                     <h:outputText value="#{personalController.current.main_email}" class="widget_text_header" />
@@ -34,7 +34,7 @@
 
             </div>       
             <h:form>
-                <div class="div" style="margin-top: 30px;">
+                <div style="margin-top: 30px;">
                     <div>
                         <h:graphicImage library="icons" name="facility-icon.png" class="widget_icon" />
                         <h:outputText value="Объекты" class="widget_text_header" />

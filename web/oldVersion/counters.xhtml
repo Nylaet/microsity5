@@ -34,27 +34,47 @@
                         <h:outputText value="Демо счетчик №1" styleClass="widget_text_header" />
                     </div>
                     <hr/>
-                    <div style="min-height: 150px;min-width: 256px;max-width: 256px;">
+                    <div >
                         <h:form>
                             <p:poll update="watt" interval="30" />
-                            <h:panelGrid columns="2" id="watt" >
-                                <h:outputText value="Тип счетчика" />
-                                <h:outputText value="Ватт-метр" />
-                                <h:outputText value="Данные на начало месяца:" />
-                                <h:outputText value="#{countersController.DValue.start} kW" />
-                                <h:outputText value="Текущие данные:" />
-                                <h:outputText value="#{countersController.DValue.now} kW" />
-                                <h:outputText value="Итого за период:" />
-                                <h:outputText value="#{countersController.DValue.difference} kW" />
-                                <h:outputText value="Последне обновление:" />
-                                <h:outputText value="#{countersController.DValue.lastUpdate}" />                                
-                            </h:panelGrid>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h:panelGrid columns="2" id="watt" >
+                                            <h:outputText value="Тип счетчика" />
+                                            <h:outputText value="Ватт-метр" />
+                                            <h:outputText value="Данные на начало месяца:" />
+                                            <h:outputText value="#{countersController.DValue.start} kW" />
+                                            <h:outputText value="Текущие данные:" />
+                                            <h:outputText value="#{countersController.DValue.now} kW" />
+                                            <h:outputText value="Итого за период:" />
+                                            <h:outputText value="#{countersController.DValue.difference} kW" />
+                                            <h:outputText value="Последне обновление:" />
+                                            <h:outputText value="#{countersController.DValue.lastUpdate}" />                                
+                                        </h:panelGrid>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <p:commandButton value="Настройка счетчика" action="#" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <p:commandButton value="Настройка событий" action="actionWizard.xhtml?faces-redirect=true" />
+                                                </td>
+                                            </tr>
+                                        </table>   
+                                    </td>
+                                </tr>
+                            </table>
                             <p:chart type="line" model="#{countersController.DValue.model}" style="width: 360px;height: 180px;" /> 
                         </h:form>
                     </div>
                 </div>
 
-                <div class="div middle">
+                <div>
                     <div>
                         <h:graphicImage library="icons" name="action-widget.png" styleClass="widget_icon" />
                         <h:outputText value="Запланированные события" styleClass="widget_text_header" />
@@ -63,18 +83,17 @@
                     <div>
                         <h:form>
                             <h:panelGrid columns="5" border="1" >
-                               <h:outputText value="Устройство"/>
-                               <h:outputText value="Условие"/>
-                               <h:outputText value="Значение"/>
-                               <h:outputText value="Действие"/>
-                               <h:outputText value="" />
-                               <h:outputText value="Демо счетчик №1" />
-                               <h:outputText value="Текущее значение больше" />
-                               <h:outputText value="61233" />
-                               <h:outputText value="Уведомление СМС" />
-                               <h:commandLink value="Изменить/Удалить" />
-                            </h:panelGrid>
-                            <h:commandButton value="Добавить задание" action="actionWizard.xhtml?faces-redirect=true" />
+                                <h:outputText value="Устройство"/>
+                                <h:outputText value="Условие"/>
+                                <h:outputText value="Значение"/>
+                                <h:outputText value="Действие"/>
+                                <h:outputText value="" />
+                                <h:outputText value="Демо счетчик №1" />
+                                <h:outputText value="Текущее значение больше" />
+                                <h:outputText value="61233" />
+                                <h:outputText value="Уведомление СМС" />
+                                <h:commandLink value="Изменить/Удалить" />
+                            </h:panelGrid>                            
                         </h:form>
                     </div>
                 </div>
@@ -156,7 +175,7 @@
         </div>
 
 
-        <ezcomp:personal/>
+        
     </h:body>
 </html>
 

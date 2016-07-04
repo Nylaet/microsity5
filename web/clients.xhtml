@@ -6,7 +6,7 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:components="http://xmlns.jcp.org/jsf/composite/components">
+      >
     <h:head>
         <components:head/>
     </h:head>
@@ -22,7 +22,6 @@
                                 <f:facet name="header">
                                     <h:graphicImage library="icons" name="#{clientsPageController.getIcon(client)}" styleClass="imgSmall" />
                                     <h:outputText value="#{client.main_email}" style="color: blue" />
-                                    <h:outputText value="#{client.lastSession}" style="font-style: italic" />
                                 </f:facet>
                                 <h:panelGrid columns="1">
                                     <h:panelGrid columns="1">
@@ -57,7 +56,7 @@
         <div id="right_content">
             <components:personal />
         </div>
-        <div id="background_image" style="background-image: url(../resources/images/743.png)"/>
+        <div id="background_image" style="background-image: url(resources/images/743.png)"/>
                     
     </h:body>
 </html>

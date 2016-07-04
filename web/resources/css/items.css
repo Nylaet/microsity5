@@ -8,3 +8,6 @@ and open the template in the editor.
     Author     : Panker-RDP
 */
 
+#left_content div{
+    margin-bottom: 8px; 
+}

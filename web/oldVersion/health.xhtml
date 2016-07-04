@@ -33,7 +33,7 @@
                         <h:outputText value="Демо браслет №1 Опека-03" styleClass="widget_text_header" />
                     </div>
                     <hr/>
-                    <div style="min-height: 150px;min-width: 256px;max-width: 256px;">
+                    <div >
                         <h:form>
                             <p:poll interval="30" update="health"  />
                             <h:panelGrid columns="2" id="health">
@@ -164,6 +164,9 @@
                 <c:if test="#{!headerController.admin}">
                 </c:if>
             </c:if>
+        </div>
+        <div id="footer">
+
         </div>
     </h:body>
 </html>

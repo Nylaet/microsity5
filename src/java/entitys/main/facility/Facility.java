@@ -52,6 +52,16 @@ public class Facility implements Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<RSPB> rspbs;
 
+    public String getCoord(){
+        String text="";
+        text=(String.valueOf(coord.getLat()))+","+(String.valueOf(coord.getLng()));
+        return text;
+    }
+    
+    public LatLng getLatLng(){
+        return coord;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -116,9 +126,7 @@ public class Facility implements Serializable {
         this.appartament = appartament;
     }
 
-    public LatLng getCoord() {
-        return coord;
-    }
+    
 
     public void setCoord(LatLng coord) {
         this.coord = coord;

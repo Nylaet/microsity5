@@ -5,12 +5,10 @@
  */
 package controllers.pagesControllers;
 
-import entitys.main.User;
 import entitys.main.support.PageContent;
 import facades.PageContentFacade;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;

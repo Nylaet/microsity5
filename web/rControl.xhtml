@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:components="http://java.sun.com/jsf/composite/components"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <components:head/>
+    </h:head>
+    <h:body>
+        <components:header/>
+        <c:if test="#{!headerController.entered}">
+            <div id="content">
+                <h:form>
+                    <table style="width: 100%;border: 0; border-spacing: 7px;">
+                        <tr>
+                            <td class="left twins column"> 
+                                <div >
+                                    <div >
+                                        <h:graphicImage library="icons" name="info-blue.png" styleClass="widget_icon" />
+                                        <h:outputText value="Руководство" styleClass="widget_text_header" />
+                                    </div>
+                                    <hr/>
+                                    <div>
+                                        <h:graphicImage library="images" name="rControl.png" class="imageContent" />
+                                        <h:outputText value="В портале microsity доступна фукция управления устройствами. 
+                                                      Вы можете удаленно открыть электро-замок, перекрыть вентиль, 
+                                                      отключить или включить электропитание в квартире. Для подключения 
+                                                      устройств Вам понадобятся модули micro-hab из нашего магазина,
+                                                      также Вы можете приобрести готовые настроенные наборы. Если у Вас
+                                                      уже есть электронный замок или электронный вентиль, Вам помогут  
+                                                      инструкции по настройке из  раздела помощь, так же Вам доступна
+                                                      консультация наших специалистов." />
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="center twins column" style="vertical-align: top;">
+                                <div >
+                                    <h:graphicImage library="icons" name="rControl-widget.png" styleClass="widget_icon" />
+                                    <h:outputText value="Демо контроллер №1" styleClass="widget_text_header" />
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div >
+                                                <h:form>
+                                                    <h:panelGrid columns="2">
+                                                        <h:outputText value="Тип датчика" />
+                                                        <h:outputText value="ESPSwitcher" />
+
+                                                        <p:commandButton value="Включить" actionListener="#{rControlController.onSwitch()}" type="button" />
+                                                        <p:commandButton value="Выключить" actionListener="#{rControlController.offSwitch()}" type="button" />
+                                                    </h:panelGrid>
+
+                                                </h:form>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <p:commandButton value="Настройка контроллера" action="#" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p:commandButton value="Настройка событий" action="actionWizard.xhtml?faces-redirect=true" />
+                                                    </td>
+                                                </tr>
+                                            </table>   
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="right column">
+                                <div>
+                                    <h:graphicImage library="icons" name="action-widget.png" styleClass="widget_icon" />
+                                    <h:outputText value="Запланированные события" styleClass="widget_text_header" />
+                                </div>
+                                <hr/>
+                                <div>
+                                    <h:form>
+                                        <h:panelGrid columns="5" border="1" >
+                                            <h:outputText value="Устройство"/>
+                                            <h:outputText value="Условие"/>
+                                            <h:outputText value="Значение"/>
+                                            <h:outputText value="Действие"/>
+                                            <h:outputText value="" />
+                                            <h:outputText value="Демо контроллер №1" />
+                                            <h:outputText value="Текущее состояние" />
+                                            <h:outputText value="Изменилось" />
+                                            <h:outputText value="Уведомление СМС" />
+                                            <h:commandLink value="Изменить/Удалить" />
+                                        </h:panelGrid>
+                                    </h:form>
+                                </div>
+                            </td>
+                        </tr>                
+                    </table>
+                </h:form>
+            </div>
+        </c:if>
+        <c:if test="#{headerController.entered}">
+            <c:if test="#{headerController.admin}">
+                <h:form>
+                    <div class="div middle">
+                        <h:outputText value="Конструктор описания услуги" class="widget_text_header" />
+                        <h:panelGrid columns="1" class="constructTable">
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Заголовок  описания" />
+                                <h:inputText value="#{rControlController.content.advertName}" />
+
+                                <h:graphicImage id="advImg" library="images" name="content_picture/#{rControlController.content.advertImage}" style="max-width: 126px;" />
+                                <h:panelGrid columns="1">
+                                    <h:outputText  value="Выберите изображение" />
+                                    <p:fileUpload auto="true" label="Изображение" fileUploadListener="#{rControlController.content.setAdvertImage}" update="advImg"/>
+                                </h:panelGrid>
+
+                                <h:outputText value="Кратко опишите услугу"/>
+                                <h:inputTextarea value="#{rControlController.content.advMainText}" />
+
+                                <h:outputText value="Опишите услугу полностью, или дополнительные данные"/>
+                                <h:inputTextarea value="#{rControlController.content.advSubtitleText}" />
+
+                                <p:commandButton value="Обновить предпросмотр" update="@form" />
+                                <p:commandButton value="Сохранить описание услуги" update="@all" actionListener="#{rControlController.saveContent()}" />
+                            </h:panelGrid>
+                        </h:panelGrid>
+                    </div>
+
+                    <div id="preview" class="div middle">
+                        <div class="imageNews" style="float: left;">
+                            <h:graphicImage library="images" name="content_picture/#{rControlController.content.advertImage}" style="max-width: 256px;" />
+                        </div>
+                        <h:outputText class="widget_text_header" value="#{rControlController.content.advertName}"/>
+                        <hr/>
+                        <h:outputText class="widget_text_main" value="#{rControlController.content.advMainText}"/>
+                        <p:panel toggleable="true" collapsed="true" header="Подробнее" style="float: left;">
+                            <h:outputText value="#{rControlController.content.advSubtitleText}" styleClass="moreText" />
+                        </p:panel>
+                    </div>
+                </h:form>
+
+            </c:if>
+        </c:if>
+
+        <div id="footer">
+
+        </div>
+
+    </h:body>
+</html>

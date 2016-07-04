@@ -98,9 +98,18 @@ public class FacilityViewController {
         return (lat + "," + lng);
     }
 
+    
+
     public MapModel getModel() {
         MapModel mp = new DefaultMapModel();
         mp.addOverlay(new Marker(new LatLng(Double.valueOf(lat), Double.valueOf(lng))));
+        return mp;
+    }
+    public static MapModel getModel(Facility facility) {
+        FacilityViewController fvc=new FacilityViewController();
+        fvc.currentFacility=facility;
+        MapModel mp = new DefaultMapModel();
+        mp.addOverlay(new Marker(facility.getLatLng()));
         return mp;
     }
 

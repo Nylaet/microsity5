@@ -106,7 +106,8 @@ public class FacilityWizardPageController implements Serializable {
             lat = "59.5611525";
             lng = "150.8301413";
         }
-
+        LatLng coord=new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
+        created.setCoord(coord);
         mp.addOverlay(new Marker(new LatLng(Double.valueOf(lat), Double.valueOf(lng)), created.getTitle()));
         return (lat + "," + lng);
     }

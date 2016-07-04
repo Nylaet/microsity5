@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:components="http://java.sun.com/jsf/composite/components"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <components:head/>
+    </h:head>
+    <h:body>
+        <components:header/>
+        <c:if test="#{!headerController.entered}">
+            <div id="content">
+                <h:form>
+                    <table style="width: 100%;border: 0; border-spacing: 7px;">
+                        <tr>
+                            <td class="left twins column"> 
+                                <div >
+                                    <div >
+                                        <h:graphicImage library="icons" name="info-blue.png" styleClass="widget_icon" />
+                                        <h:outputText value="Руководство" styleClass="widget_text_header" />
+                                    </div>
+                                    <hr/>
+                                    <div>
+                                        <h:graphicImage library="images" name="sensors.png" class="imageContent" />
+                                        <h:outputText value="Датчики Умного дома могут быть автономными или
+                                                      интегрированными в другие системы, например Power Max.
+                                                      Для подключения датчиков Вам понадобятся модули micro-hab
+                                                      из нашего магазина, также Вы можете приобрести готовые 
+                                                      настроенные наборы. Инструкции по настройке есть в разделе
+                                                      помощь, так же Вам доступна консультация наших специалистов." />
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="center twins column" style="vertical-align: top;">
+                                <div>
+                                    <div >
+                                        <h:graphicImage library="icons" name="new-icon.png" styleClass="widget_icon" />
+                                        <h:outputText value="Демо датчик №1" styleClass="widget_text_header" />
+                                    </div>
+                                    <hr/>
+                                    <div >
+                                        <h:form>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <p:poll interval="30" update="temperature" />
+                                                        <h:panelGrid columns="2" id="temperature">
+                                                            <h:outputText value="Тип датчика" />
+                                                            <h:outputText value="Температура" />
+                                                            <h:outputText value="Текущие данные:" />
+                                                            <h:outputText value="#{sensorsController.DValue.now} С &deg;" />
+                                                            <h:outputText value="Последне обновление:" />
+                                                            <h:outputText value="#{sensorsController.DValue.lastUpdate}" />
+                                                        </h:panelGrid>
+                                                    </td>
+                                                    <td>
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <p:commandButton value="Настройка датчика" action="#" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <p:commandButton value="Настройка событий" action="actionWizard.xhtml?faces-redirect=true" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>   
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <p:chart type="line" model="#{sensorsController.DValue.model}" style="width: 360px;height: 180px;" />
+                                        </h:form>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div>
+                                    <div >
+                                        <h:graphicImage library="icons" name="new-icon.png" styleClass="widget_icon" />
+                                        <h:outputText value="Демо датчик №2 PowerMax" styleClass="widget_text_header" />
+                                    </div>
+                                    <hr/>
+                                    <div>
+                                        <h:form>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <h:outputText value="Тип датчика" />
+                                                        <h:outputText value="PowerMax-MicroSity" />
+                                                        
+                                                        <table>
+                                                            <tr>
+                                                                <td><h:outputText value="Название" /></td>
+                                                                <td><h:outputText value="Состояние" /></td>
+                                                                <td><h:outputText value="Последняя тревога" style="white-space: nowrap;" /></td>
+                                                                <td><h:outputText value="Действие" /></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin4.pin_name}" /></td>
+                                                                <td><h:outputText value="Норма" style="color: green" rendered="#{!sensorsController.pwrMax.pin4.last_state}" /><h:outputText value="Тревога" style="color: red" rendered="#{sensorsController.pwrMax.pin4.last_state}" /></td>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin5.last_change}" style="white-space: nowrap;" /></td>
+                                                                <td><p:commandButton value="Снять тревогу" actionListener="#{sensorsController.disarmPin(sensorsController.pwrMax.pin4)}" style="white-space: nowrap;" update="@form"  /></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin5.pin_name}" /></td>
+                                                                <td><h:outputText value="Норма" style="color: green" rendered="#{!sensorsController.pwrMax.pin5.last_state}" /><h:outputText value="Тревога" style="color: red" rendered="#{sensorsController.pwrMax.pin5.last_state}" /></td>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin5.last_change}" style="white-space: nowrap;" /></td>
+                                                                <td><p:commandButton value="Снять тревогу" actionListener="#{sensorsController.disarmPin(sensorsController.pwrMax.pin5)}" style="white-space: nowrap;" update="@form" /></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin12.pin_name}" /></td>
+                                                                <td><h:outputText value="Норма" style="color: green" rendered="#{!sensorsController.pwrMax.pin12.last_state}" /><h:outputText value="Тревога" style="color: red" rendered="#{sensorsController.pwrMax.pin12.last_state}" /></td>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin12.last_change}" style="white-space: nowrap;" /></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin14.pin_name}" /></td>
+                                                                <td><h:outputText value="Норма" style="color: green" rendered="#{!sensorsController.pwrMax.pin14.last_state}" /><h:outputText value="Тревога" style="color: red" rendered="#{sensorsController.pwrMax.pin14.last_state}" /></td>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin14.last_change}" style="white-space: nowrap;" /></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin2.pin_name}" /></td>
+                                                                <td><h:outputText value="Норма" style="color: green" rendered="#{!sensorsController.pwrMax.pin2.last_state}" /><h:outputText value="Тревога" style="color: red" rendered="#{sensorsController.pwrMax.pin2.last_state}" /></td>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin2.last_change}" style="white-space: nowrap;" /></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin0.pin_name}" /></td>
+                                                                <td><h:outputText value="Норма" style="color: green" rendered="#{!sensorsController.pwrMax.pin0.last_state}" /><h:outputText value="Тревога" style="color: red" rendered="#{sensorsController.pwrMax.pin0.last_state}" /></td>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin0.last_change}" style="white-space: nowrap;" /></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin13.pin_name}" /></td>
+                                                                <td><h:outputText value="Норма" style="color: green" rendered="#{!sensorsController.pwrMax.pin13.last_state}" /><h:outputText value="Тревога" style="color: red" rendered="#{sensorsController.pwrMax.pin13.last_state}" /></td>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin13.last_change}" style="white-space: nowrap;" /></td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin15.pin_name}" /></td>
+                                                                <td><h:outputText value="Норма" style="color: green" rendered="#{!sensorsController.pwrMax.pin15.last_state}" /><h:outputText value="Тревога" style="color: red" rendered="#{sensorsController.pwrMax.pin15.last_state}" /></td>
+                                                                <td><h:outputText value="#{sensorsController.pwrMax.pin15.last_change}" style="white-space: nowrap;" /></td>
+                                                                <td></td>
+                                                            </tr>
+                                                        </table>                                                        
+                                                    </td>
+                                                    <td>
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <p:commandButton value="Настройка датчика" action="#" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <p:commandButton value="Настройка событий" action="actionWizard.xhtml?faces-redirect=true" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>   
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="right column">
+                                <div>
+                                    <h:graphicImage library="icons" name="action-widget.png" styleClass="widget_icon" />
+                                    <h:outputText value="Запланированные события" styleClass="widget_text_header" />
+                                </div>
+                                <hr/>
+                                <div>
+                                    <h:form>
+                                        <h:panelGrid columns="5" border="1" >
+                                            <h:outputText value="Устройство"/>
+                                            <h:outputText value="Условие"/>
+                                            <h:outputText value="Значение"/>
+                                            <h:outputText value="Действие"/>
+                                            <h:outputText value="" />
+                                            <h:outputText value="Демо датчик №1" />
+                                            <h:outputText value="Текущее значение больше" />
+                                            <h:outputText value="24" />
+                                            <h:outputText value="Включить Демо контроллер №1" />
+                                            <h:commandLink value="Изменить/Удалить" />
+
+                                            <h:outputText value="Демо датчик №1" />
+                                            <h:outputText value="Текущее значение меньше" />
+                                            <h:outputText value="20" />
+                                            <h:outputText value="Выключить Демо контроллер №1" />
+                                            <h:commandLink value="Изменить/Удалить" />
+
+                                            <h:outputText value="Демо датчик №1" />
+                                            <h:outputText value="Текущее значение больше" />
+                                            <h:outputText value="24" />
+                                            <h:outputText value="Уведомление СМС" />
+                                            <h:commandLink value="Изменить/Удалить" />
+
+                                            <h:outputText value="Демо датчик №1" />
+                                            <h:outputText value="Текущее значение меньше" />
+                                            <h:outputText value="20" />
+                                            <h:outputText value="Уведомление СМС" />
+                                            <h:commandLink value="Изменить/Удалить" />
+                                        </h:panelGrid>
+
+                                    </h:form>
+                                </div>
+                            </td>
+                        </tr>                
+                    </table>
+                </h:form>
+            </div>
+        </c:if>
+        <c:if test="#{headerController.entered}">
+            <c:if test="#{!headerController.admin}">
+                <div id="content">
+                    <h:form>
+                        <table style="width: 100%;border: 0; border-spacing: 7px;">
+                            <tr>
+                                <td class="left twins column"> 
+                                    <div >
+                                        <div >
+                                            <h:graphicImage library="icons" name="info-blue.png" styleClass="widget_icon" />
+                                            <h:outputText value="Руководство" styleClass="widget_text_header" />
+                                        </div>
+                                        <hr/>
+                                        <div>
+                                            <h:graphicImage library="images" name="counters.png" class="imageContent" />
+                                            <h:outputText value="Чтобы увидеть on-line данные бытовых счетчиков
+                                                          (газа, воды, электроэнергии) и передать эти данные поставщикам услуг
+                                                          необходимо  иметь  счетчики с импульсным интерфейсом и устройство сопряжения
+                                                          micro-hab. Устройство micro-hub и вспомогательный электросчетчик можно приобрести
+                                                          на нашем сайте www.microsity.pl. Для приема показаний электросчетчика НЕ НУЖНО МЕНЯТЬ
+                                                          установленный у Вас счетчик, достаточно за ним поставить импульсный. 
+                                                          Для установки счетчиков воды и газа обращайтесь, пожалуйста, в обслуживающие организации,
+                                                          стоимость счетчиков с импульсным интерфейсом на 3-5 % выше, чем обычных." />
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="center twins column" style="vertical-align: top;">
+                                    <c:if test="#{camerasController.current.facilitys.size()>0}">
+                                        <c:forEach var="facility" items="#{camerasController.current.facilitys}">
+                                            <c:if test="#{facility.cameras.size()>0}">
+                                                <c:forEach var="camera" items="#{facility.cameras}">
+                                                    <div>
+                                                        <div>
+                                                            <h:graphicImage library="icons" name="camera-widget.png" styleClass="widget_icon" />
+                                                            <h:outputText value="Объект: #{facility.title}, камера #{camera.name}" styleClass="widget_text_header" />
+                                                        </div>
+                                                        <hr/>
+                                                        <div>
+                                                            <h:form>
+                                                                <p:poll update="cam#{camera.id}" interval="5" >
+                                                                    <p:graphicImage id="cam#{camera.id}" cache="false" style="max-width: 126px;" alt="Камера не доступна в данный момент"  
+                                                                                    value="#{camera.JPGLink}" />
+                                                                </p:poll>
+                                                            </h:form>
+                                                            <h:commandLink actionListener="#{camerasController.setCameraToChange(camera)}" value="Изменить" action="cameraWizard" />
+                                                        </div>
+                                                    </div>
+                                                    <hr/>
+                                                </c:forEach>
+                                            </c:if>
+                                            <c:if test="#{facility.cameras.isEmpty()}">
+                                                <div>
+                                                    <div>
+                                                        <h:graphicImage library="icons" name="camera-widget.png" styleClass="widget_icon" />
+                                                        <h:outputText value="Объект: #{facility.title}, камер нет" styleClass="widget_text_header" />
+                                                    </div>
+                                                    <hr/>
+                                                    <h:form>
+                                                        <h:commandLink value="Новая камера" action="cameraWizard" />
+                                                    </h:form>
+                                                </div>
+                                            </c:if>
+                                        </c:forEach>
+                                    </c:if>
+                                    <c:if test="#{camerasController.current.facilitys.isEmpty()}">
+                                        <div>
+                                            <div>
+                                                <h:graphicImage library="icons" name="camera-widget.png" styleClass="widget_icon" />
+                                                <h:outputText value="Не обнаружено зарегистрированных объектов" styleClass="widget_text_header" />
+                                            </div>
+                                            <hr/>
+                                            <h:form>
+                                                <h:commandLink value="Новый объект" action="facilityWizard" />
+                                            </h:form>
+                                        </div>
+                                    </c:if>
+                                </td>
+                                <td class="right column">
+                                    <div >
+                                        <components:personal />
+                                    </div>
+                                </td>
+                            </tr>                
+                        </table>
+                    </h:form>
+                </div>
+            </c:if>
+            <c:if test="#{headerController.admin}">
+            </c:if>
+        </c:if>
+        <div id="footer">
+
+        </div>
+
+    </h:body>
+</html>
